@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Greeter</title>
+    <style>
+        * {
+            font-size: 1.5em;
+        }
+
+        button {
+            height: 50px;
+            width: 150px;
+            font-size: 14px;
+        }
+
+        @media (min-width: 1024px) {
+            body {
+                background-color: red;
+                padding: 100px;
+            }
+        }
+    </style>
+</head>
+
+<script>
+    "use strict";
+
+    window.onload = function () {
+        const hello = document.querySelector("#btn-hello");
+        hello.addEventListener("click", sayHello);
+
+        const goodbye = document.querySelector("#btn-goodbye");
+        goodbye.addEventListener("click", sayGoodbye);
+
+        function sayHello() {
+            const firstname = document.querySelector("#input-firstname").value.trim() || "Peter";
+            const lastname = document.querySelector("#input-lastname").value.trim() || "Parker";
+            const output = document.querySelector("#output");
+
+            output.innerHTML = `Hello, ${firstname} ${lastname}!`;
+            output.style.color = "red";
+            output.style.backgroundColor = "yellow";
+        }
+
+        function sayGoodbye() {
+            const firstname = document.querySelector("#input-firstname").value.trim() || "Peter";
+            const lastname = document.querySelector("#input-lastname").value.trim() || "Parker";
+            const output = document.querySelector("#output");
+
+            output.innerHTML = `Goodbye, ${firstname} ${lastname}!`;
+            output.style.color = "red";
+            output.style.backgroundColor = "yellow";
+        }
+    };
+</script>
+
+<body>
+    <button id="btn-hello">Say Hello</button>
+    <button id="btn-goodbye">Say Goodbye</button>
+
+    <input id="input-firstname" placeholder="Type in your name">
+    <input id="input-lastname" placeholder="Type in your last name">
+
+    <p id="output">???</p>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>XHR - Load Text</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>XHR - Load Text File</h2>
+    <p>The <code>pet-names.txt</code> file contains popular dog and cat pet names, separated by commas.</p>
+    <p>Note that because XHR is loading a local file, this and the other examples will have to be run off a web server
+        rather than from your computer's hard drive (e.g. banjo.rit.edu or VSCode's liveserver etc)</p>
+
+    <hr>
+    <button id="my-button">Load Data</button>
+    <p id="output">Click button to load</p>
+
+
+    <script>
+        "use strict";
+
+        const output = document.querySelector("#output");
+        document.querySelector("#my-button").onclick = loadTextXHR;
+
+        function loadTextXHR() {
+            const url = "data/pet-names.xml";
+            const xhr = new XMLHttpRequest();
+            xhr.onload = (e) => {
+                console.log(`In onload - HTTP Status Code = ${e.target.status}`);
+                const text = e.target.responseXML;
+                console.log(`Success - the file length is ${text.length}`);
+
+                // Extract dog and cat names based on the 'cid' attribute
+                const dogNames = text.querySelector('namelist[cid="dognames"]').textContent.split(",");
+                const catNames = text.querySelector('namelist[cid="catnames"]').textContent.split(",");
+
+                // Prepare dog names
+                let dogString = "<h3>Dog Names:</h3>";
+                dogNames.forEach((name, index) => {
+                    dogString += `${index + 1}. ${name}<br>`;
+                });
+
+                // Prepare cat names
+                let catString = "<h3>Cat Names:</h3>";
+                catNames.forEach((name, index) => {
+                    catString += `${index + 1}. ${name}<br>`;
+                });
+
+                // Display dog and cat names
+                output.innerHTML = dogString + catString;
+            };
+            xhr.onerror = e => console.log(`In onerror - HTTP Status Code = ${e.target.status}`);
+            xhr.open("GET", url);
+            xhr.send();
+        }
+    </script>
+</body>
+
+</html>
