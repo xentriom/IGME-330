@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>First Canvas</title>
+    <style>
+        canvas {
+            border: 1px solid gray;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        button {
+            font-size: 1.2em;
+        }
+
+        section {
+            margin: .5em 0 .5em 0;
+        }
+    </style>
+    <script>
+        "use strict";
+
+        let canvas;
+        let ctx;
+        let paused = false;
+        let createRectangles = true;
+
+        window.onload = init;
+
+        function init() {
+            console.log("page loaded!");
+
+            canvas = document.querySelector("canvas");
+            ctx = canvas.getContext("2d");
+
+            ctx.fillStyle = "red";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            setupUI();
+            update();
+        };
+
+        function update() {
+            if (paused) return;
+            if (!createRectangles) return;
+            requestAnimationFrame(update);
+            drawRandomRect(ctx);
+        }
+
+        function drawRandomRect(ctx) {
+            ctx.strokeStyle = getRandomColor();
+            ctx.fillStyle = getRandomColor();
+            ctx.lineWidth = getRandomInt(2, 12);
+            ctx.beginPath();
+            ctx.rect(getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(10, 90), getRandomInt(10, 90));
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        // Event Handlers
+        function canvasClicked(e) {
+            let rect = e.target.getBoundingClientRect();
+            let mouseX = e.clientX - rect.x;
+            let mouseY = e.clientY - rect.y;
+            console.log(mouseX, mouseY);
+            for (let i = 0; i < 10; i++) {
+                let x = getRandomInt(-100, 100) + mouseX;
+                let y = getRandomInt(-100, 100) + mouseY;
+                let width = getRandomInt(20, 50);
+                let height = getRandomInt(20, 50);
+                let color = getRandomColor();
+                drawRectange(ctx, x, y, width, height, color);
+            }
+        }
+
+        function drawRectange(ctx, x, y, width, height, fillstyle = "black", linewidth = 0, strokestyle = "black") {
+            ctx.save();
+            ctx.fillStyle = fillstyle;
+            ctx.beginPath();
+            ctx.rect(x, y, width, height);
+            ctx.fill();
+            if (linewidth > 0) {
+                ctx.lineWidth = linewidth;
+                ctx.strokeStyle = strokestyle;
+                ctx.stroke();
+            }
+            ctx.closePath();
+            ctx.restore();
+        }
+
+        function setupUI() {
+            document.querySelector("#btnPause").onclick = () => {
+                paused = true;
+            };
+
+            document.querySelector("#btnPlay").onclick = () => {
+                if (!paused) return;
+                paused = false;
+                update();
+            };
+
+            canvas.onclick = canvasClicked;
+
+            document.querySelector("#cbRectangles").onclick = (e) => {
+                createRectangles = e.target.checked;
+                if (createRectangles) update();
+            };
+        }
+
+        // handy helper functions!
+        function getRandomColor() {
+            function getByte() {
+                return 55 + Math.round(Math.random() * 200);
+            }
+            return "rgba(" + getByte() + "," + getByte() + "," + getByte() + ",.8)";
+        }
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+    </script>
+</head>
+
+<body>
+    <canvas width="640" height="480">
+        Get a real browser!
+    </canvas>
+
+    <section>
+        <button id="btnPlay">Play</button>
+        <button id="btnPause">Pause</button>
+    </section>
+    <section>
+        <span>
+            <input type="checkbox" id="cbRectangles" checked>
+            <label for="cbRectangles">Rectangles</label>
+        </span>
+    </section>
+    <section>
+        <p>Click on the screen to "spraypaint" rectangles (you probably want the screensaver to be paused)</p>
+    </section>
+</body>
+
+</html>
