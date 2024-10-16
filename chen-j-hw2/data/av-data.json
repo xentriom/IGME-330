@@ -1,0 +1,29 @@
+{
+    "title": "Audio Visualizer",
+    "drawParams": {
+        "showGradient": true,
+        "showBars": true,
+        "showCircles": true,
+        "showNoise": false,
+        "showInvert": false,
+        "showEmboss": false
+    },
+    "data": [
+        {
+            "name": "Natlan Battle Theme",
+            "path": "media/Natlan Battle Theme.mp3"
+        },
+        {
+            "name": "Raiden Shogun Trailer Theme",
+            "path": "media/Raiden Shogun Trailer Theme.mp3"
+        },
+        {
+            "name": "Sumeru Port Ormos Theme",
+            "path": "media/Sumeru Port Ormos Theme.mp3"
+        },
+        {
+            "name": "[Testing] Pink Noise",
+            "path": "media/Pink Noise.mp3"
+        }
+    ]
+}
