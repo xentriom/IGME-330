@@ -18,7 +18,11 @@ const setupCanvas = (canvasElement, analyserNodeRef) => {
     canvasWidth = canvasElement.width;
     canvasHeight = canvasElement.height;
     // create a gradient that runs top to bottom
-    gradient = utils.getLinearGradient(ctx, 0, 0, 0, canvasHeight, [{ percent: 0, color: "#61ff69" }, { percent: .5, color: "#ff6961" }, { percent: 1, color: "#6961ff" }]);
+    gradient = utils.getLinearGradient(ctx, 0, 0, 0, canvasHeight, [
+        { percent: 0, color: "#b3e5fc" },
+        { percent: 0.5, color: "#ce93d8" },
+        { percent: 1, color: "#fff59d" }
+    ]);
     // keep a reference to the analyser node
     analyserNode = analyserNodeRef;
     // this is the array where the analyser data will be stored
@@ -28,9 +32,13 @@ const setupCanvas = (canvasElement, analyserNodeRef) => {
 const draw = (params = {}) => {
     // 1 - populate the audioData array with the frequency data from the analyserNode
     // notice these arrays are passed "by reference" 
-    analyserNode.getByteFrequencyData(audioData);
-    // OR
-    //analyserNode.getByteTimeDomainData(audioData); // waveform data
+    if (params.visualizerType) {
+        analyserNode.getByteFrequencyData(audioData);
+    }
+    else {
+        // OR
+        analyserNode.getByteTimeDomainData(audioData); // waveform data
+    }
 
     // 2 - draw background
     ctx.save();
@@ -47,58 +55,106 @@ const draw = (params = {}) => {
         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
         ctx.restore();
     }
-    // 4 - draw bars
+    // 4 - draw bars, but revised
     if (params.showBars) {
-        let barSpacing = 4;
-        let margin = 5;
-        let screenWidthForBars = canvasWidth - (audioData.length * barSpacing) - margin * 2;
+        let barSpacing = 2;
+        let margin = 0;
+        let screenWidthForBars = canvasWidth - (audioData.length * barSpacing) - margin;
         let barWidth = screenWidthForBars / audioData.length;
-        let barHeight = 200;
-        let topSpacing = 100;
-
+    
         ctx.save();
-        ctx.fillStyle = 'rgba(255,255,255,0.50)';
-        ctx.strokeStyle = 'rgba(0,0,0,0.50)';
-        //loop through the data and draw!
+        
+        let gradient = ctx.createLinearGradient(0, canvasHeight, 0, 0);
+        gradient.addColorStop(0, 'rgba(255,255,255,0.85)');
+        gradient.addColorStop(1, 'rgba(255,105,180,0.85)');
+        
+        ctx.fillStyle = gradient;
+        ctx.strokeStyle = 'rgba(0,0,0,0.15)';
+        ctx.lineWidth = 1.5;
+        ctx.lineJoin = 'round';
+    
         for (let i = 0; i < audioData.length; i++) {
-            ctx.fillRect(margin + i * (barWidth + barSpacing), topSpacing + 256 - audioData[i], barWidth, barHeight);
-            ctx.strokeRect(margin + i * (barWidth + barSpacing), topSpacing + 256 - audioData[i], barWidth, barHeight);
+            let barHeight = Math.max((audioData[i] / 255) * canvasHeight * 0.8, 1);
+            let x = margin + i * (barWidth + barSpacing);
+            let y = canvasHeight - barHeight;
+    
+            ctx.fillRect(Math.floor(x), Math.floor(y), Math.ceil(barWidth), Math.ceil(barHeight));
+            ctx.strokeRect(Math.floor(x), Math.floor(y), Math.ceil(barWidth), Math.ceil(barHeight));
         }
+    
         ctx.restore();
     }
-    // 5 - draw circles
+    // 5 - draw circles, but revised
     if (params.showCircles) {
         let maxRadius = canvasHeight / 4;
+        let centerX = canvasWidth / 2;
+        let centerY = canvasHeight / 2;
+        
         ctx.save();
         ctx.globalAlpha = 0.5;
+
         for (let i = 0; i < audioData.length; i++) {
-            // red-ish circles
-            let percent = audioData[i] / 255;
-
-            let circleRadius = percent * maxRadius;
+            const percent = audioData[i] !== undefined ? audioData[i] / 255 : 0; // Ensure percent is valid
+            const pulse = Math.sin(Date.now() / 300 + i) * 0.05;
+            
+            // Calculate circle radius and clamp it to avoid negative values
+            let circleRadius = Math.max((percent + pulse) * maxRadius, 0);
+    
+            // Draw the first circle
             ctx.beginPath();
-            ctx.fillStyle = utils.makeColor(255, 111, 111, .34 - percent / 3.0);
-            ctx.arc(canvasWidth / 2, canvasHeight / 2, circleRadius, 0, 2 * Math.PI, false);
+            ctx.fillStyle = utils.makeColor(255, 150, 150, 0.4 - percent / 3.0);
+            ctx.arc(centerX, centerY, circleRadius, 0, 2 * Math.PI, false);
             ctx.fill();
             ctx.closePath();
-
-            //blue-ish circles, bigger, more transparent
+    
+            // Draw the second circle with increased radius
             ctx.beginPath();
-            ctx.fillStyle = utils.makeColor(0, 0, 255, .10 - percent / 10.0);
-            ctx.arc(canvasWidth / 2, canvasHeight / 2, circleRadius * 1.5, 0, 2 * Math.PI, false);
+            ctx.fillStyle = utils.makeColor(135, 206, 250, 0.15 - percent / 10.0);
+            ctx.arc(centerX, centerY, Math.max(circleRadius * 1.6 + pulse * 20, 0), 0, 2 * Math.PI, false);
             ctx.fill();
             ctx.closePath();
-
-            //yellowish circles, smaller
+    
             ctx.save();
+            
+            // Draw the third circle with decreased radius
             ctx.beginPath();
-            ctx.fillStyle = utils.makeColor(200, 200, 0, .5 - percent / 5.0);
-            ctx.arc(canvasWidth / 2, canvasHeight / 2, circleRadius * .5, 0, 2 * Math.PI, false);
+            ctx.fillStyle = utils.makeColor(255, 255, 100, 0.6 - percent / 5.0);
+            ctx.arc(centerX, centerY, Math.max(circleRadius * 0.5 - pulse * 10, 0), 0, 2 * Math.PI, false);
             ctx.fill();
             ctx.closePath();
+            
             ctx.restore();
         }
+    
         ctx.restore();
+    
+        // for (let i = 0; i < audioData.length; i++) {
+        //     let percent = audioData[i] / 255;
+        //     let pulse = Math.sin(Date.now() / 300 + i) * 0.05;
+        //     let circleRadius = (percent + pulse) * maxRadius;
+
+        //     ctx.beginPath();
+        //     ctx.fillStyle = utils.makeColor(255, 150, 150, 0.4 - percent / 3.0);
+        //     ctx.arc(centerX, centerY, circleRadius, 0, 2 * Math.PI, false);
+        //     ctx.fill();
+        //     ctx.closePath();
+    
+        //     ctx.beginPath();
+        //     ctx.fillStyle = utils.makeColor(135, 206, 250, 0.15 - percent / 10.0);
+        //     ctx.arc(centerX, centerY, circleRadius * 1.6 + pulse * 20, 0, 2 * Math.PI, false);
+        //     ctx.fill();
+        //     ctx.closePath();
+    
+        //     ctx.save();
+        //     ctx.beginPath();
+        //     ctx.fillStyle = utils.makeColor(255, 255, 100, 0.6 - percent / 5.0);
+        //     ctx.arc(centerX, centerY, circleRadius * 0.5 - pulse * 10, 0, 2 * Math.PI, false);
+        //     ctx.fill();
+        //     ctx.closePath();
+        //     ctx.restore();
+        // }
+    
+        // ctx.restore();
     }
 
     let imageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
@@ -119,6 +175,7 @@ const draw = (params = {}) => {
 
         // invert?
         if (params.showInvert) {
+            console.log("invert");
             let red = data[i], green = data[i + 1], blue = data[i + 2];
             data[i] = 255 - red;
             data[i + 1] = 255 - green;
@@ -133,9 +190,9 @@ const draw = (params = {}) => {
             data[i] = 127 + 2 * data[i] - data[i + 4] - data[i + width * 4];
         }
     }
-    
+
     // D) copy image data back to canvas
     ctx.putImageData(imageData, 0, 0);
 }
 
-export { setupCanvas, draw };
+export { setupCanvas, draw, ctx };

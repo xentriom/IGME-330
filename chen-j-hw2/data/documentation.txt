@@ -3,7 +3,7 @@ Two audio effect nodes added:
 - Treble (frequency and gain)
 
 Sprite class:
-
+located in spirte.js, it basically is responsible for the spinning of image
 
 App data:
 - Title

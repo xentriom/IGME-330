@@ -3,51 +3,143 @@
 
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>???</title>
+    <meta property="og:title" content="Audio Visualizer">
+    <meta property="og:url" content=https://people.rit.edu/jc5892/av/>
+    <meta property="og:description"
+        content="Visualize the harmonious tunes.">
+    <meta property="og:type" content=website>
+    <meta property="og:image:width" content="1080" />
+    <meta property="og:image:height" content="1080" />
+    <link rel="icon" type="image/png" sizes="16x16" href="media/favicon.ico">
     <link href="styles/default-styles.css" type="text/css" rel="stylesheet" />
     <script src="src/loader.js" type="module"></script>
 </head>
 
 <body>
     <main>
-        <canvas width="800" height="400"></canvas>
-        <div id="controls">
-            <section id="playback-controls">
-                <button id="btn-play" data-playing="no"></button>
-                <button id="btn-fs">Full Screen</button>
+        <div class="canvas flex-column">
+            <canvas></canvas>
 
-                <label>Track:
-                    <select id="select-track"></select>
-                </label><br>
+            <input type="range" id="progress-bar" min="0" max="100" value="0" step="0.1"
+                title="Progress Viewer/Control">
 
-                <section>
-                    <input type="range" id="progress-bar" min="0" max="100" value="0" step="0.1">
+            <section id="playback-controls" class="flex-row inline-center">
+                <section id="main-controls">
+                    <button id="btn-play" data-playing="no">
+                        <img class="btn-button" src="https://c.animaapp.com/yPlj5CdF/img/svgexport-83-1.svg"
+                            alt="Play/Pause Button" />
+                    </button>
+
+                    <input type="range" id="slider-volume" min="0" max="2" value="1" step="0.01"
+                        aria-label="Volume Control">
                     <span id="progress-label">??? / ???</span>
                 </section>
 
-                <section>
-                    Volume: <input type="range" id="slider-volume" min="0" max="2" value="1" step="0.01">
+                <button id="btn-fs">
+                    <img src="https://c.animaapp.com/yPlj5CdF/img/svgexport-95-1.svg" alt="Full Screen Icon" />
+                </button>
+            </section>
+        </div>
+
+        <div class="tracks flex-column inline-center">
+            <h2 class="remove-text-flairs heading">Available Tracks</h2>
+
+            <div id="track-selection"></div>
+        </div>
+
+        <div class="controls">
+            <section id="visualizer-controls" class="flex-column">
+                <label class="switch">
+                    <span>Visualizer Type</span>
+                    <input type="checkbox" id="cb-visualizer">
+                    <span class="slider round"></span>
+                </label>
+
+                <label class="switch">
+                    <span>Show Gradient</span>
+                    <input type="checkbox" id="cb-gradient">
+                    <span class="slider round"></span>
+                </label>
+
+                <label class="switch">
+                    <span>Show Bars</span>
+                    <input type="checkbox" id="cb-bars">
+                    <span class="slider round"></span>
+                </label>
+
+                <label class="switch">
+                    <span>Show Circles</span>
+                    <input type="checkbox" id="cb-circles">
+                    <span class="slider round"></span>
+                </label>
+
+                <label class="switch">
+                    <span>Show Inverted</span>
+                    <input type="checkbox" id="cb-invert">
+                    <span class="slider round"></span>
+                </label>
+
+                <label class="switch">
+                    <span>Show Noise</span>
+                    <input type="checkbox" id="cb-noise">
+                    <span class="slider round"></span>
+                </label>
+
+                <label class="switch">
+                    <span>Show Emboss</span>
+                    <input type="checkbox" id="cb-emboss">
+                    <span class="slider round"></span>
+                </label>
+            </section>
+
+            <section id="bass-controls" class="flex-column">
+                <section class="flex-column effects">
+                    <section class="flex-row inline-center">
+                        <h2 class="remove-text-flairs">Bass Gain</h2>
+                        <span id="label-bass-gain">???</span>
+                    </section>
+
+                    <h3 class="remove-text-flairs">Minimum: 0 dB | Maximum: 12 dB</h3>
+                    <input type="range" id="slider-bass-gain" min="0" max="12" value="6" step="1"
+                        title="Bass Gain Control">
+                </section>
+
+                <section class="flex-column effects">
+                    <section class="flex-row inline-center">
+                        <h2 class="remove-text-flairs">Bass Frequency</h2>
+                        <span id="label-bass-frequency">???</span>
+                    </section>
+
+                    <h3 class="remove-text-flairs">Minimum: 20 Hz | Maximum: 250 Hz</h3>
+                    <input type="range" id="slider-bass-frequency" min="20" max="250" value="200" step="5"
+                        title="Bass Frequency Control">
                 </section>
             </section>
-            <section>
-                Bass Frequency: <input type="range" id="slider-bass-frequency" min="20" max="250" value="200" step="5">
-                <span id="label-bass-frequency">???</span><br>
-                Bass Gain: <input type="range" id="slider-bass-gain" min="0" max="12" value="6" step="1">
-                <span id="label-bass-gain">???</span><br>
-            </section>
-            <section>
-                Treble Frequency: <input type="range" id="slider-treble-frequency" min="4000" max="20000" value="4000" step="500">
-                <span id="label-treble-frequency">???</span><br>
-                Treble Gain: <input type="range" id="slider-treble-gain" min="0" max="12" value="4" step="1">
-                <span id="label-treble-gain">???</span>
-            </section>
-            <section>
-                <span><input type="checkbox" id="cb-gradient"><label for="cb-gradient">Show Gradient</label></span>
-                <span><input type="checkbox" id="cb-bars"><label for="cb-bars">Show Bars</label></span>
-                <span><input type="checkbox" id="cb-circles"><label for="cb-circles">Show Circles</label></span>
-                <span><input type="checkbox" id="cb-noise"><label for="cb-noise">Show Noise</label></span>
-                <span><input type="checkbox" id="cb-invert"><label for="cb-invert">Show Invert</label></span>
-                <span><input type="checkbox" id="cb-emboss"><label for="cb-emboss">Show Emboss</label></span>
+
+            <section id="treble-controls" class="flex-column">
+                <section class="flex-column effects">
+                    <section class="flex-row inline-center">
+                        <h2 class="remove-text-flairs">Treble Gain</h2>
+                        <span id="label-treble-gain">???</span>
+                    </section>
+
+                    <h3 class="remove-text-flairs">Minimum: 0 dB | Maximum: 12 dB</h3>
+                    <input type="range" id="slider-treble-gain" min="0" max="12" value="4" step="1"
+                        title="Treble Gain Control">
+                </section>
+
+                <section class="flex-column effects">
+                    <section class="flex-row inline-center">
+                        <h2 class="remove-text-flairs">Treble Frequency</h2>
+                        <span id="label-treble-frequency">???</span>
+                    </section>
+
+                    <h3 class="remove-text-flairs">Minimum: 4,000 Hz | Maximum: 20,0000 Hz</h3>
+                    <input type="range" id="slider-treble-frequency" min="4000" max="20000" value="4000" step="500"
+                        title="Treble Frequency Control">
+                </section>
             </section>
         </div>
     </main>
