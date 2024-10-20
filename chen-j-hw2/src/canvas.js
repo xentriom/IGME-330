@@ -175,7 +175,6 @@ const draw = (params = {}) => {
 
         // invert?
         if (params.showInvert) {
-            console.log("invert");
             let red = data[i], green = data[i + 1], blue = data[i + 2];
             data[i] = 255 - red;
             data[i + 1] = 255 - green;
