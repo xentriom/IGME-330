@@ -175,7 +175,6 @@ footer {
     background-color: black;
 }
 
-/* Base styles for the switches */
 .switch {
     display: flex;
     align-items: center;
@@ -188,14 +187,12 @@ footer {
     color: #333;
 }
 
-/* Hide default checkbox */
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-/* Create the slider (the pill) */
 .slider {
     position: relative;
     width: 50px;
@@ -218,7 +215,6 @@ footer {
     transition: transform 0.3s;
 }
 
-/* Checked state styles */
 input:checked+.slider {
     background-color: #2196F3;
 }
@@ -227,7 +223,6 @@ input:checked+.slider:before {
     transform: translateX(26px);
 }
 
-/* Rounded slider (pill shape) */
 .slider.round {
     border-radius: 34px;
 }

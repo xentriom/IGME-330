@@ -7,7 +7,7 @@ const getRandom = (min, max) => {
 };
 
 const getRandomColor = () => {
-    const floor = 35; // so that colors are not too bright or too dark 
+    const floor = 35;
     const getByte = () => getRandom(floor, 255 - floor);
     return `rgba(${getByte()},${getByte()},${getByte()},1)`;
 };
@@ -20,18 +20,20 @@ const getLinearGradient = (ctx, startX, startY, endX, endY, colorStops) => {
     return lg;
 };
 
-// https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API
 const goFullscreen = (element) => {
+    // fun fact: lint standards require else if to be in new line
     if (element.requestFullscreen) {
         element.requestFullscreen();
-    } else if (element.mozRequestFullscreen) {
+    } 
+    else if (element.mozRequestFullscreen) {
         element.mozRequestFullscreen();
-    } else if (element.mozRequestFullScreen) { // camel-cased 'S' was changed to 's' in spec
+    } 
+    else if (element.mozRequestFullScreen) {
         element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) {
+    } 
+    else if (element.webkitRequestFullscreen) {
         element.webkitRequestFullscreen();
     }
-    // .. and do nothing if the method is not supported
 };
 
 const setupSlider = (sliderId, labelId, unit, setValueCallback) => {
@@ -43,7 +45,6 @@ const setupSlider = (sliderId, labelId, unit, setValueCallback) => {
         label.innerHTML = `${e.target.value} ${unit}`;
     };
 
-    // Trigger the event to set the initial label value
     slider.dispatchEvent(new Event("input"));
 };
 
