@@ -11,7 +11,7 @@ class Sprite {
         const rotate = () => {
             this.rotationAngle -= 1;
             this.image.style.transform = `rotate(${this.rotationAngle}deg)`;
-            this.rotationInterval = requestAnimationFrame(rotate);
+            this.rotationInterval = setTimeout(rotate, 1000 / 60);
         };
 
         rotate();
