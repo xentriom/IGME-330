@@ -18,8 +18,7 @@ I would say im more backend when it comes to web stuff, i like the javascript.
 I can never seem to get the correct layout i want so im going to insert a picture
 with what i was trying to accomplish. I think i deserve the full 15% since i tried
 to implement the aesthics i wanted to go for but failed, miserably.
-one thing i hate is the two balls, my creative mind went blank as i implemented 
-them so now theyre just bouncing around. 
+the sprites were supposed to represent spotlights moving around on stage :/
 
 Notes:
 i deleted the comments that came from pe08 since theyre redundant, you
