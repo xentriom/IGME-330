@@ -136,6 +136,7 @@ const setupUI = (canvasElement) => {
     // instand of previous verisons, i went with a more compact way
     const checkboxes = [
         { id: "cb-visualizer", param: "visualizerType" },
+        { id: "cb-sprites", param: "showSprites" },
         { id: "cb-gradient", param: "showGradient" },
         { id: "cb-bars", param: "showBars" },
         { id: "cb-circles", param: "showCircles" },

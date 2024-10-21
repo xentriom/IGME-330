@@ -4,6 +4,9 @@ Two audio effect nodes added:
 
 Sprite class:
 located in spirte.js, it basically is responsible for the spinning of image
+the 3 balls that appear in the canvas is what your most likely looking for
+their size scales on audio (you should notice them getting bigger/smaller)
+it is likely going to only be visible on the red one since the others have such small scale
 
 App data:
 - Title
@@ -15,3 +18,5 @@ I would say im more backend when it comes to web stuff, i like the javascript.
 I can never seem to get the correct layout i want so im going to insert a picture
 with what i was trying to accomplish. I think i deserve the full 15% since i tried
 to implement the aesthics i wanted to go for but failed, miserably.
+one thing i hate is the two balls, my creative mind went blank as i implemented 
+them so now theyre just bouncing around. also i think the 60fps limit is making me want to puke....

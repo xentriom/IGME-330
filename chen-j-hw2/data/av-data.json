@@ -2,6 +2,7 @@
     "title": "Audio Visualizer",
     "drawParams": {
         "visualizerType": true,
+        "showSprites": true,
         "showGradient": true,
         "showBars": true,
         "showCircles": true,
