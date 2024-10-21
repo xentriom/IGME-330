@@ -6,6 +6,14 @@ const DEFAULTS = Object.freeze({
     numSamples: 256
 });
 
+// defaults for biquad filter
+const BIQUAD_DEFAULTS = Object.freeze({
+    BASS_FREQ: 200,
+    BASS_GAIN: 6,
+    TREBLE_FREQ: 4000,
+    TREBLE_GAIN: 4
+});
+
 let audioData = new Uint8Array(DEFAULTS.numSamples / 2);
 
 const setupWebaudio = (filePath) => {
@@ -16,23 +24,28 @@ const setupWebaudio = (filePath) => {
 
     loadSoundFile(filePath);
 
+    // create nodes
     sourceNode = audioCtx.createMediaElementSource(element);
     analyserNode = audioCtx.createAnalyser();
     analyserNode.fftSize = DEFAULTS.numSamples;
 
+    // create gain node
     gainNode = audioCtx.createGain();
     gainNode.gain.value = DEFAULTS.gain;
 
+    // create bass filter
     bassFilter = audioCtx.createBiquadFilter();
     bassFilter.type = "lowshelf";
-    bassFilter.frequency.setValueAtTime(200, audioCtx.currentTime);
-    bassFilter.gain.setValueAtTime(6, audioCtx.currentTime);
+    bassFilter.frequency.setValueAtTime(BIQUAD_DEFAULTS.BASS_FREQ, audioCtx.currentTime);
+    bassFilter.gain.setValueAtTime(BIQUAD_DEFAULTS.BASS_GAIN, audioCtx.currentTime);
 
+    // create treble filter
     trebleFilter = audioCtx.createBiquadFilter();
     trebleFilter.type = "highshelf";
-    trebleFilter.frequency.setValueAtTime(4000, audioCtx.currentTime);
-    trebleFilter.gain.setValueAtTime(4, audioCtx.currentTime);
+    trebleFilter.frequency.setValueAtTime(BIQUAD_DEFAULTS.TREBLE_FREQ, audioCtx.currentTime);
+    trebleFilter.gain.setValueAtTime(BIQUAD_DEFAULTS.TREBLE_GAIN, audioCtx.currentTime);
 
+    // connect nodes
     sourceNode.connect(analyserNode);
     analyserNode.connect(bassFilter);
     bassFilter.connect(trebleFilter);

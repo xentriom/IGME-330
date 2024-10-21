@@ -8,6 +8,7 @@ class Sprite {
     startRotation() {
         if (this.rotationInterval) return;
 
+        // rotate the image counter-clockwise
         const rotate = () => {
             this.rotationAngle -= 1;
             this.image.style.transform = `rotate(${this.rotationAngle}deg)`;
@@ -19,6 +20,7 @@ class Sprite {
 
     stopRotation() {
         if (this.rotationInterval) {
+            // stop the rotation
             clearTimeout(this.rotationInterval);
             this.rotationInterval = null;
         }
@@ -38,14 +40,18 @@ class CanvasSprite {
 
     update(audioData, canvasWidth, canvasHeight) {
         const percent = audioData.reduce((a, b) => a + b) / (audioData.length * 255);
+
+        // update size and position
         this.size = Math.max(percent * 100 * this.scale, 20);
         this.x += this.velocity.x;
         this.y += this.velocity.y;
 
+        // bounce off the x edges
         if (this.x < 0 || this.x > canvasWidth) {
             this.velocity.x *= -1;
         }
 
+        // bounce off the y edges
         if (this.y < 0 || this.y > canvasHeight) {
             this.velocity.y *= -1;
         }

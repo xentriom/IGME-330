@@ -10,9 +10,9 @@ const DEFAULTS = Object.freeze({
 });
 
 const preload = async () => {
-    alert("Tracks provided are for educational purposes only. All rights belong to their respective owners.");
-    alert("Audio may not play/pause on the first click.\nPlease click the button again to play/pause the audio.\n\nRecommended screen width: 1080+");
+    alert("Audio may not play on the first click.\nPlease click the button again to start the audio.\n\nRecommended screen width: 1080+");
 
+    // fetch and store the data
     const response = await fetch("data/av-data.json");
     const data = await response.json();
     avData = data;
@@ -20,16 +20,17 @@ const preload = async () => {
     return data;
 }
 
-const init = async () => {
+const init = () => {
     audio.setupWebaudio(DEFAULTS.sound1);
 
+    // set up canvas ui
     let canvasElement = document.querySelector("canvas");
     setupUI(canvasElement);
+    canvas.setupCanvas(canvasElement, audio.analyserNode);
 
+    // set up track selection
     let trackElement = document.querySelector("#track-selection");
     setupTracks(trackElement);
-
-    canvas.setupCanvas(canvasElement, audio.analyserNode);
 
     loop();
 }
@@ -37,6 +38,7 @@ const init = async () => {
 const setupTracks = (trackElement) => {
     const sprites = new Map();
 
+    // create a div for each track
     for (let track of avData.data) {
         let div = document.createElement("div");
         div.classList.add("track");
@@ -72,6 +74,7 @@ const setupTracks = (trackElement) => {
     const initSpirte = sprites.values().next().value;
     initSpirte.startRotation();
 
+    // set up click event
     const playButton = document.querySelector("#btn-play");
     const playButtonImage = playButton.querySelector("img");
     trackElement.onclick = e => {
@@ -81,6 +84,7 @@ const setupTracks = (trackElement) => {
             const trackPath = trackDiv.dataset.path;
             audio.loadSoundFile(trackPath);
 
+            // rotate the playing sprite
             sprites.forEach((s, div) => {
                 div == trackDiv
                     ? s.startRotation()
@@ -93,12 +97,13 @@ const setupTracks = (trackElement) => {
 }
 
 const setupUI = (canvasElement) => {
+    // full screen button
     const fsButton = document.querySelector("#btn-fs");
     fsButton.onclick = e => {
-        console.log("goFullscreen() called");
         utils.goFullscreen(canvasElement);
     };
 
+    // play/pause button
     const playButton = document.querySelector("#btn-play");
     const playButtonImage = playButton.querySelector("img");
     playButton.onclick = e => {
@@ -153,6 +158,7 @@ const setupUI = (canvasElement) => {
         };
     });
 
+    // progress bar
     const progressBar = document.querySelector("#progress-bar");
     progressBar.oninput = e => {
         let newTime = audio.getDuration() * (e.target.value / 100);
@@ -166,6 +172,9 @@ const loop = () => {
     updateProgress();
 }
 
+/**
+ * update the progress bar and label
+ */
 const updateProgress = () => {
     const progressBar = document.querySelector("#progress-bar");
     const progressLabel = document.querySelector("#progress-label");

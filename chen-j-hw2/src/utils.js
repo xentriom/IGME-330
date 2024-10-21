@@ -51,22 +51,15 @@ const setupSlider = (sliderId, labelId, unit, setValueCallback) => {
 const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
+
+    // format time as mm:ss
     return `${String(minutes).padStart(1, '0')}:${String(secs).padStart(2, '0')}`;
 };
 
-const fetchDrawParams = async () => {
-    let drawParams = {};
-
-    const response = await fetch('data/av-data.json');
-    const data = await response.json();
-    drawParams = data.drawParams;
-    
-    return data.drawParams;
-}
-
+// enum for toggle button images
 const TOGGLE_BUTTONS = Object.freeze({
     PLAY: "https://c.animaapp.com/fgpR59jS/img/svgexport-35--1--1@2x.png",
     PAUSE: "https://c.animaapp.com/yPlj5CdF/img/svgexport-83-1.svg"
 })
 
-export { makeColor, getRandomColor, getLinearGradient, goFullscreen, setupSlider, formatTime, fetchDrawParams, TOGGLE_BUTTONS };
+export { makeColor, getRandomColor, getLinearGradient, goFullscreen, setupSlider, formatTime, TOGGLE_BUTTONS };

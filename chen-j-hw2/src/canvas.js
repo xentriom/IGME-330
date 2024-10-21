@@ -18,12 +18,14 @@ const setupCanvas = (canvasElement, analyserNodeRef) => {
     analyserNode = analyserNodeRef;
     audioData = new Uint8Array(analyserNode.fftSize / 2);
 
+    // create sprites
     sprite1 = new CanvasSprite(100, 100, 10, 'rgba(255, 0, 0, 0.2)', 1);
     sprite2 = new CanvasSprite(100, 100, 10, 'rgba(0, 0, 255, 0.2)', 0.5);
     sprite3 = new CanvasSprite(100, 100, 10, 'rgba(0, 255, 0, 0.2)', 0.25);
 }
 
 const draw = (params = {}) => {
+    // draw visualizer depending on the type
     params.visualizerType
         ? analyserNode.getByteFrequencyData(audioData)
         : analyserNode.getByteTimeDomainData(audioData);
@@ -34,6 +36,7 @@ const draw = (params = {}) => {
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
     ctx.restore();
 
+    // show gradient
     if (params.showGradient) {
         ctx.save();
         ctx.fillStyle = gradient;
@@ -42,6 +45,7 @@ const draw = (params = {}) => {
         ctx.restore();
     }
 
+    // show bars
     if (params.showBars) {
         let barSpacing = 2;
         let margin = 0;
@@ -71,6 +75,7 @@ const draw = (params = {}) => {
         ctx.restore();
     }
 
+    // show circles
     if (params.showCircles) {
         let maxRadius = canvasHeight / 4;
         let centerX = canvasWidth / 2;
@@ -110,6 +115,7 @@ const draw = (params = {}) => {
         ctx.restore();
     }
 
+    // show sprites
     if (params.showSprites) {
         sprite1.update(audioData, canvasWidth, canvasHeight);
         sprite2.update(audioData, canvasWidth, canvasHeight);
@@ -126,10 +132,12 @@ const draw = (params = {}) => {
     let width = imageData.width;
 
     for (let i = 0; i < length; i += 4) {
+        // show noise
         if (params.showNoise && Math.random() < .05) {
             data[i] = data[i + 1] = data[i + 2] = 255;
         }
 
+        // show invert
         if (params.showInvert) {
             let red = data[i], green = data[i + 1], blue = data[i + 2];
             data[i] = 255 - red;
@@ -138,6 +146,7 @@ const draw = (params = {}) => {
         }
     }
 
+    // show emboss
     if (params.showEmboss) {
         for (let i = 0; i < length; i++) {
             if (i % 4 == 3) continue;
@@ -146,10 +155,6 @@ const draw = (params = {}) => {
     }
 
     ctx.putImageData(imageData, 0, 0);
-
-    // setTimeout(() => {
-    //     draw(params);
-    // }, 1000 / 60);
 }
 
 export { setupCanvas, draw, ctx };

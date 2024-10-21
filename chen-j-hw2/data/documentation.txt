@@ -19,4 +19,9 @@ I can never seem to get the correct layout i want so im going to insert a pictur
 with what i was trying to accomplish. I think i deserve the full 15% since i tried
 to implement the aesthics i wanted to go for but failed, miserably.
 one thing i hate is the two balls, my creative mind went blank as i implemented 
-them so now theyre just bouncing around. also i think the 60fps limit is making me want to puke....
+them so now theyre just bouncing around. 
+
+Notes:
+i deleted the comments that came from pe08 since theyre redundant, you
+know what they are and what they do, youve probably seen those comments one too many times.
+i added basic comments for what each thing does.
