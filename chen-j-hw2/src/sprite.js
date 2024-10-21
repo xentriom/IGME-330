@@ -19,7 +19,7 @@ class Sprite {
 
     stopRotation() {
         if (this.rotationInterval) {
-            cancelAnimationFrame(this.rotationInterval);
+            clearTimeout(this.rotationInterval);
             this.rotationInterval = null;
         }
         this.image.style.transform = '';
