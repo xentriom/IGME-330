@@ -1,0 +1,26 @@
+Two audio effect nodes added:
+- Bass (frequency and gain)
+- Treble (frequency and gain)
+
+Sprite class:
+located in spirte.js, it basically is responsible for the spinning of image
+the 3 balls that appear in the canvas is what your most likely looking for
+their size scales on audio (you should notice them getting bigger/smaller)
+it is likely going to only be visible on the red one since the others have such small scale
+
+App data:
+- Title
+- draw parameters
+- audio file data
+
+Aesthics:
+I would say im more backend when it comes to web stuff, i like the javascript.
+I can never seem to get the correct layout i want so im going to insert a picture
+with what i was trying to accomplish. I think i deserve the full 15% since i tried
+to implement the aesthics i wanted to go for but failed, miserably.
+the sprites were supposed to represent spotlights moving around on stage :/
+
+Notes:
+i deleted the comments that came from pe08 since theyre redundant, you
+know what they are and what they do, youve probably seen those comments one too many times.
+i added basic comments for what each thing does.

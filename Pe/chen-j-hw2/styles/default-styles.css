@@ -1,0 +1,232 @@
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(180, 220, 255);
+    height: 100vh;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: .7fr .3fr;
+    grid-template-areas:
+        "canvas canvas canvas tracks"
+        "controls controls controls controls";
+    gap: 10px;
+    padding: 10px;
+    height: 100vh;
+}
+
+.canvas {
+    grid-area: canvas;
+    position: relative;
+    height: 100%;
+}
+
+.tracks {
+    grid-area: tracks;
+    justify-content: space-evenly;
+}
+
+.controls {
+    grid-area: controls;
+    display: flex;
+    justify-content: space-around;
+}
+
+.canvas,
+.tracks,
+.controls {
+    background-color: rgb(225, 227, 255);
+    border-radius: 10px;
+}
+
+#playback-controls {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: space-between;
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: relative;
+    align-self: center;
+}
+
+#progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: rgb(225, 227, 255);
+    border-radius: 0px;
+    outline: none;
+    margin: 0;
+    top: 0;
+    position: relative;
+    z-index: 1;
+    appearance: none;
+}
+
+canvas {
+    height: 100%;
+    position: relative;
+    z-index: 0;
+    background-color: black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#playback-controls img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+#slider-volume {
+    margin-top: 0px;
+}
+
+#main-controls {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+#progress-label {
+    margin-left: 10px;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.inline-center {
+    align-items: center;
+}
+
+#track-selection {
+    width: 100%;
+}
+
+.track {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    background-color: rgb(136, 164, 246);
+    height: 6em;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.track:hover {
+    background-color: rgb(136, 136, 238);
+}
+
+.track img {
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    margin: 5%;
+}
+
+.track-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2%;
+    margin-right: 5%;
+}
+
+.remove-text-flairs {
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    margin: 0px;
+}
+
+.heading {
+    font-size: 2em;
+    padding-top: 5px;
+}
+
+#visualizer-controls,
+#bass-controls,
+#treble-controls {
+    background-color: rgb(177, 177, 255);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 15px;
+    width: 33%;
+    justify-content: space-around;
+}
+
+footer {
+    background-color: black;
+}
+
+.switch {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.switch span {
+    margin-right: 10px;
+    color: #333;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: relative;
+    width: 50px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 34px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}

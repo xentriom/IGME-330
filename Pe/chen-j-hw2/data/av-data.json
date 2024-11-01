@@ -1,0 +1,45 @@
+{
+    "title": "Audio Visualizer",
+    "drawParams": {
+        "visualizerType": true,
+        "showSprites": true,
+        "showGradient": true,
+        "showBars": true,
+        "showCircles": true,
+        "showNoise": false,
+        "showInvert": false,
+        "showEmboss": false
+    },
+    "data": [
+        {
+            "name": "Natlan Battle Theme",
+            "author": "HoYo-Mix",
+            "image": "media/Natlan Battle Theme.jpg",
+            "path": "media/Natlan Battle Theme.mp3"
+        },
+        {
+            "name": "Raiden Shogun Trailer Theme",
+            "author": "HoYo-Mix",
+            "image": "media/Raiden Shogun Trailer Theme.jpg",
+            "path": "media/Raiden Shogun Trailer Theme.mp3"
+        },
+        {
+            "name": "Sumeru Port Ormos OST",
+            "author": "HoYo-Mix",
+            "image": "media/Sumeru Port Ormos Theme.jpg",
+            "path": "media/Sumeru Port Ormos Theme.mp3"
+        },
+        {
+            "name": "New Adventure Theme",
+            "author": "Unknown, maybe 330 course creator. pls credit source :>",
+            "image": "",
+            "path": "media/New Adventure Theme.mp3"
+        },
+        {
+            "name": "[Testing] Pink Noise",
+            "author": "DigitalSpa",
+            "image": "media/Pink Noise.webp",
+            "path": "media/Pink Noise.mp3"
+        }
+    ]
+}
