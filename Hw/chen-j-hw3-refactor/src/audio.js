@@ -1,20 +1,20 @@
 let audioCtx;
 let element, sourceNode, analyserNode, gainNode, bassFilter, trebleFilter;
 
-const DEFAULTS = Object.freeze({
-    gain: .5,
-    numSamples: 256
+const Defaults = Object.freeze({
+    GAIN: .5,
+    NUM_SAMPLE: 256
 });
 
 // defaults for biquad filter
-const BIQUAD_DEFAULTS = Object.freeze({
+const BiquadDefaults = Object.freeze({
     BASS_FREQ: 200,
     BASS_GAIN: 6,
     TREBLE_FREQ: 4000,
     TREBLE_GAIN: 4
 });
 
-let audioData = new Uint8Array(DEFAULTS.numSamples / 2);
+let audioData = new Uint8Array(Defaults.NUM_SAMPLE / 2);
 
 const setupWebaudio = (filePath) => {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -27,23 +27,23 @@ const setupWebaudio = (filePath) => {
     // create nodes
     sourceNode = audioCtx.createMediaElementSource(element);
     analyserNode = audioCtx.createAnalyser();
-    analyserNode.fftSize = DEFAULTS.numSamples;
+    analyserNode.fftSize = Defaults.NUM_SAMPLE;
 
     // create gain node
     gainNode = audioCtx.createGain();
-    gainNode.gain.value = DEFAULTS.gain;
+    gainNode.gain.value = Defaults.GAIN;
 
     // create bass filter
     bassFilter = audioCtx.createBiquadFilter();
     bassFilter.type = "lowshelf";
-    bassFilter.frequency.setValueAtTime(BIQUAD_DEFAULTS.BASS_FREQ, audioCtx.currentTime);
-    bassFilter.gain.setValueAtTime(BIQUAD_DEFAULTS.BASS_GAIN, audioCtx.currentTime);
+    bassFilter.frequency.setValueAtTime(BiquadDefaults.BASS_FREQ, audioCtx.currentTime);
+    bassFilter.gain.setValueAtTime(BiquadDefaults.BASS_GAIN, audioCtx.currentTime);
 
     // create treble filter
     trebleFilter = audioCtx.createBiquadFilter();
     trebleFilter.type = "highshelf";
-    trebleFilter.frequency.setValueAtTime(BIQUAD_DEFAULTS.TREBLE_FREQ, audioCtx.currentTime);
-    trebleFilter.gain.setValueAtTime(BIQUAD_DEFAULTS.TREBLE_GAIN, audioCtx.currentTime);
+    trebleFilter.frequency.setValueAtTime(BiquadDefaults.TREBLE_FREQ, audioCtx.currentTime);
+    trebleFilter.gain.setValueAtTime(BiquadDefaults.TREBLE_GAIN, audioCtx.currentTime);
 
     // connect nodes
     sourceNode.connect(analyserNode);

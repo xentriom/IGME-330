@@ -1,7 +1,7 @@
 import * as utils from './utils.js';
 import * as audio from './audio.js';
 import * as canvas from './canvas.js';
-import { Sprite } from './sprite.js';
+import { Sprite } from './Sprite.js';
 
 let avData;
 
@@ -91,7 +91,7 @@ const setupTracks = (trackElement) => {
                     : s.stopRotation();
             });
 
-            playButtonImage.src = utils.TOGGLE_BUTTONS.PAUSE;
+            playButtonImage.src = utils.ToggleButtons.PAUSE;
         }
     }
 }
@@ -114,12 +114,12 @@ const setupUI = (canvasElement) => {
         if (e.target.dataset.playing == "no") {
             audio.playCurrentSound();
             e.target.dataset.playing = "yes"; //our css will set the text to "Pause", no it will not
-            playButtonImage.src = utils.TOGGLE_BUTTONS.PLAY;
+            playButtonImage.src = utils.ToggleButtons.PLAY;
         }
         else {
             audio.pauseCurrentSound();
             e.target.dataset.playing = "no";// our CSS will set the text to "Play", no it will not
-            playButtonImage.src = utils.TOGGLE_BUTTONS.PAUSE;
+            playButtonImage.src = utils.ToggleButtons.PAUSE;
         }
     };
 

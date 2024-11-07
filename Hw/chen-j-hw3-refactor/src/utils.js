@@ -57,9 +57,9 @@ const formatTime = (seconds) => {
 };
 
 // enum for toggle button images
-const TOGGLE_BUTTONS = Object.freeze({
+const ToggleButtons = Object.freeze({
     PLAY: "https://c.animaapp.com/fgpR59jS/img/svgexport-35--1--1@2x.png",
     PAUSE: "https://c.animaapp.com/yPlj5CdF/img/svgexport-83-1.svg"
 })
 
-export { makeColor, getRandomColor, getLinearGradient, goFullscreen, setupSlider, formatTime, TOGGLE_BUTTONS };
+export { makeColor, getRandomColor, getLinearGradient, goFullscreen, setupSlider, formatTime, ToggleButtons };
