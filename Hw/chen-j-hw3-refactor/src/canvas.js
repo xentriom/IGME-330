@@ -1,5 +1,5 @@
 import * as utils from './utils.js';
-import { CanvasSprite } from './sprite.js';
+import { CanvasSprite } from './CanvasSprite.js';
 
 let ctx, canvasWidth, canvasHeight, gradient, analyserNode, audioData;
 let sprite1, sprite2, sprite3;
