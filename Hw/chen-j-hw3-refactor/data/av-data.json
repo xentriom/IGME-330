@@ -28,6 +28,12 @@
             "author": "HOYO-MiX",
             "image": "media/Sumeru Port Ormos Theme.jpg",
             "path": "media/Sumeru Port Ormos Theme.mp3"
+        },
+        {
+            "name": "[Testing] Pink Noise",
+            "author": "DigitalSpa",
+            "image": "media/Pink Noise.webp",
+            "path": "media/Pink Noise.mp3"
         }
     ]
 }

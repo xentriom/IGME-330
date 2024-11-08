@@ -10,8 +10,6 @@ const DEFAULTS = Object.freeze({
 });
 
 const preload = async () => {
-    alert("Audio may not play on the first click.\nPlease click the button again to start the audio.\n\nRecommended screen width: 1080+");
-
     // fetch and store the data
     const response = await fetch("data/av-data.json");
     const data = await response.json();
@@ -41,7 +39,7 @@ const setupTracks = (trackElement) => {
     // create a div for each track
     for (let track of avData.data) {
         let div = document.createElement("div");
-        div.classList.add("box");
+        div.classList.add("box", "track");
         div.dataset.name = track.name;
         div.dataset.path = track.path;
 

@@ -237,9 +237,9 @@ body {
     padding: 0px;
     background-color: rgb(180, 220, 255);
     height: 100vh;
-    overflow: hidden;
 }
 
+/* Override the section's uneven padding in Bulma */
 .section {
     padding: 1.5rem;
 }
@@ -251,4 +251,102 @@ body {
 /* Override last child rule in Bulma for treble */
 #treble-controls {
     margin-bottom: 1.5rem;
+}
+
+/* Add ponter and hover functionality to tracks, disk image */
+.track {
+    cursor: pointer;
+}
+
+.track:hover {
+    background-color: rgb(136, 136, 238);
+}
+
+.track img {
+    border-radius: 50%;
+    margin: 5%;
+}
+
+/* #playback {
+    padding: 0px;
+    position: relative;
+}
+
+canvas {
+    width: 100%;
+    position: relative;
+    z-index: 0;
+    background-color: black;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+#progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: rgb(225, 227, 255);
+    border-radius: 0px;
+    outline: none;
+    margin: 0;
+    top: -1rem;
+    position: relative;
+    z-index: 1;
+    appearance: none;
+}
+
+#playback-controls {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: space-between;
+    width: 100%;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    position: relative;
+    align-self: center;
+    top: -1.5rem;
+} */
+
+#playback-controls img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+#playback {
+    padding: 0; /* Remove padding on the container box */
+    position: relative;
+}
+
+canvas {
+    width: 100%;
+    position: relative;
+    z-index: 0;
+    background-color: black;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    margin: 0; /* Ensure no margin on canvas */
+}
+
+#progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: rgb(225, 227, 255);
+    border-radius: 0;
+    outline: none;
+    margin: 0; /* Remove margin on the slider */
+    position: relative;
+    z-index: 1;
+    appearance: none;
+}
+
+#playback-controls {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: space-between;
+    width: 100%;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    align-self: center;
+    margin-top: 0; /* Eliminate space above */
+    padding: 0; /* Remove padding */
 }

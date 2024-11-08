@@ -47,8 +47,8 @@
 
     <main class="section">
         <div class="columns is-multiline">
-            <div class="canvas column is-three-quarters">
-                <div class="box">
+            <div class="column is-two-thirds">
+                <div id="playback" class="box">
                     <canvas></canvas>
 
                     <input type="range" id="progress-bar" class="slider is-fullwidth" min="0" max="100" value="0" step="0.1"
@@ -56,7 +56,7 @@
 
                     <div id="playback-controls" class="flex-row inline-center">
                         <div id="main-controls">
-                            <button id="btn-play" data-playing="no" class="button is-primary is-light">
+                            <button id="btn-play" data-playing="no" class="button is-primary is-dark">
                                 <img class="btn-button" src="https://c.animaapp.com/yPlj5CdF/img/svgexport-83-1.svg"
                                     alt="Play/Pause Button">
                             </button>
@@ -66,14 +66,14 @@
                             <span id="progress-label">??? / ???</span>
                         </div>
 
-                        <button id="btn-fs" class="button is-primary is-light">
+                        <button id="btn-fs" class="button is-primary is-dark">
                             <img src="https://c.animaapp.com/yPlj5CdF/img/svgexport-95-1.svg" alt="Full Screen Icon">
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div class="tracks column is-one-quarter">
+            <div class="tracks column is-one-thirds">
                 <div class="box">
                     <h2 class="title is-4 has-text-centered">Available Tracks</h2>
 
