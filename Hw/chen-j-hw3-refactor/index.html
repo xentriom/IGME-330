@@ -51,8 +51,8 @@
                 <div id="playback" class="box">
                     <canvas></canvas>
 
-                    <input type="range" id="progress-bar" class="slider is-fullwidth" min="0" max="100" value="0" step="0.1"
-                        title="Progress Viewer/Control">
+                    <input type="range" id="progress-bar" class="slider is-fullwidth" min="0" max="100" value="0"
+                        step="0.1" title="Progress Viewer/Control">
 
                     <div id="playback-controls" class="flex-row inline-center">
                         <div id="main-controls">
@@ -73,94 +73,101 @@
                 </div>
             </div>
 
-            <div class="tracks column is-one-thirds">
+            <div class="tracks column is-one-third">
                 <div class="box">
-                    <h2 class="title is-4 has-text-centered">Available Tracks</h2>
-
+                    <!-- <h2 id="track-title" class="title is-4 has-text-centered">Available Tracks</h2> -->
                     <div id="track-selection"></div>
                 </div>
             </div>
 
             <div class="controls column is-full">
-                <div class="columns">
-                    <div id="visualizer-controls" class="column box">
-                        <div class="field">
-                            <label class="checkbox">
-                                <input type="checkbox" id="cb-visualizer" class="switch"> Visualizer Type
-                            </label>
+                <div id="controls-section" class="columns is-flex is-justify-content-space-evenly">
+                    <div id="visualizer-controls" class="box is-flex column is-one-third">
+                        <div class="">
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="cb-visualizer" class="switch"> Visualizer Type
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="cb-sprites" class="switch"> Show Sprites
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="cb-gradient" class="switch"> Show Gradient
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="cb-bars" class="switch"> Show Bars
+                                </label>
+                            </div>
                         </div>
-                        <div class="field">
-                            <label class="checkbox">
-                                <input type="checkbox" id="cb-sprites" class="switch"> Show Sprites
-                            </label>
-                        </div>
-                        <div class="field">
-                            <label class="checkbox">
-                                <input type="checkbox" id="cb-gradient" class="switch"> Show Gradient
-                            </label>
-                        </div>
-                        <div class="field">
-                            <label class="checkbox">
-                                <input type="checkbox" id="cb-bars" class="switch"> Show Bars
-                            </label>
-                        </div>
-                        <div class="field">
-                            <label class="checkbox">
-                                <input type="checkbox" id="cb-circles" class="switch"> Show Circles
-                            </label>
-                        </div>
-                        <div class="field">
-                            <label class="checkbox">
-                                <input type="checkbox" id="cb-invert" class="switch"> Show Inverted
-                            </label>
-                        </div>
-                        <div class="field">
-                            <label class="checkbox">
-                                <input type="checkbox" id="cb-noise" class="switch"> Show Noise
-                            </label>
-                        </div>
-                        <div class="field">
-                            <label class="checkbox">
-                                <input type="checkbox" id="cb-emboss" class="switch"> Show Emboss
-                            </label>
+                        <div class="">
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="cb-circles" class="switch"> Show Circles
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="cb-invert" class="switch"> Show Inverted
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="cb-noise" class="switch"> Show Noise
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="cb-emboss" class="switch"> Show Emboss
+                                </label>
+                            </div>
                         </div>
                     </div>
 
-                    <div id="bass-controls" class="column box">
+                    <div id="bass-controls" class="box column is-flex is-one-third">
                         <div class="field">
-                            <label class="label">Bass Gain <span id="label-bass-gain" class="has-text-weight-light ml-2">???</span></label>
+                            <label class="label">Bass Gain <span id="label-bass-gain"
+                                    class="has-text-weight-light ml-2">???</span></label>
                             <div class="control">
-                                <input type="range" id="slider-bass-gain" class="slider is-fullwidth" min="0" max="12" value="6" step="1"
-                                    title="Bass Gain Control">
+                                <input type="range" id="slider-bass-gain" class="slider is-fullwidth" min="0" max="12"
+                                    value="6" step="1" title="Bass Gain Control">
                             </div>
                             <p class="help">Minimum: 0 dB | Maximum: 12 dB</p>
                         </div>
-            
+
                         <div class="field">
-                            <label class="label">Bass Frequency <span id="label-bass-frequency" class="has-text-weight-light ml-2">???</span></label>
+                            <label class="label">Bass Frequency <span id="label-bass-frequency"
+                                    class="has-text-weight-light ml-2">???</span></label>
                             <div class="control">
-                                <input type="range" id="slider-bass-frequency" class="slider is-fullwidth" min="20" max="250" value="200" step="5"
-                                    title="Bass Frequency Control">
+                                <input type="range" id="slider-bass-frequency" class="slider is-fullwidth" min="20"
+                                    max="250" value="200" step="5" title="Bass Frequency Control">
                             </div>
                             <p class="help">Minimum: 20 Hz | Maximum: 250 Hz</p>
                         </div>
                     </div>
 
-                    <div id="treble-controls" class="column box">                        
+                    <div id="treble-controls" class="box column is-flex is-one-third">
                         <div class="field">
-                            <label class="label">Treble Gain <span id="label-treble-gain" class="has-text-weight-light ml-2">???</span></label>
+                            <label class="label">Treble Gain <span id="label-treble-gain"
+                                    class="has-text-weight-light ml-2">???</span></label>
                             <div class="control">
-                                <input type="range" id="slider-treble-gain" class="slider is-fullwidth" min="0" max="12" value="4" step="1"
-                                    title="Treble Gain Control">
+                                <input type="range" id="slider-treble-gain" class="slider is-fullwidth" min="0" max="12"
+                                    value="4" step="1" title="Treble Gain Control">
                             </div>
                             <p class="help">Minimum: 0 dB | Maximum: 12 dB</p>
                         </div>
-            
+
                         <div class="field">
-                            <label class="label">Treble Frequency <span id="label-treble-frequency" class="has-text-weight-light ml-2">???</span></label>
+                            <label class="label">Treble Frequency <span id="label-treble-frequency"
+                                    class="has-text-weight-light ml-2">???</span></label>
                             <div class="control">
-                                <input type="range" id="slider-treble-frequency" class="slider is-fullwidth" min="4000" max="20000" value="4000"
-                                    step="500" title="Treble Frequency Control">
+                                <input type="range" id="slider-treble-frequency" class="slider is-fullwidth" min="4000"
+                                    max="20000" value="4000" step="500" title="Treble Frequency Control">
                             </div>
                             <p class="help">Minimum: 4,000 Hz | Maximum: 20,000 Hz</p>
                         </div>

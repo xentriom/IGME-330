@@ -39,7 +39,7 @@ const setupTracks = (trackElement) => {
     // create a div for each track
     for (let track of avData.data) {
         let div = document.createElement("div");
-        div.classList.add("box", "track");
+        div.classList.add("box", "track", "track-info");
         div.dataset.name = track.name;
         div.dataset.path = track.path;
 
@@ -65,12 +65,12 @@ const setupTracks = (trackElement) => {
         mediaContent.classList.add("media-content");
 
         let h3 = document.createElement("h3");
-        h3.classList.add("title", "is-6");
+        h3.classList.add("title", "is-5");
         h3.innerHTML = track.name;
         mediaContent.appendChild(h3);
 
         let p = document.createElement("p");
-        p.classList.add("subtitle", "is-7");
+        p.classList.add("subtitle", "is-6");
         p.innerHTML = track.author;
         mediaContent.appendChild(p);
 
