@@ -6,7 +6,7 @@ import { Sprite } from './Sprite.js';
 let avData;
 
 const DEFAULTS = Object.freeze({
-    sound1: "./media/Natlan Battle Theme.mp3"
+    sound1: "./media/Natlan Theme.mp3"
 });
 
 const preload = async () => {
@@ -39,34 +39,84 @@ const setupTracks = (trackElement) => {
     const sprites = new Map();
 
     // create a div for each track
-    for (let track of avData.data) {
-        let div = document.createElement("div");
-        div.classList.add("track");
+    // for (let track of avData.data) {
+    //     let div = document.createElement("div");
+    //     div.classList.add("track");
 
+    //     div.dataset.name = track.name;
+    //     div.dataset.path = track.path;
+
+    //     let img = document.createElement("img");
+    //     img.src = track.image;
+    //     div.appendChild(img);
+
+    //     const sprite = new Sprite(img);
+    //     sprites.set(div, sprite);
+
+    //     let div2 = document.createElement("div");
+    //     div2.classList.add("track-info");
+
+    //     let h3 = document.createElement("h3");
+    //     h3.classList.add("remove-text-flairs");
+    //     h3.innerHTML = track.name;
+    //     div2.appendChild(h3);
+
+    //     let p = document.createElement("p");
+    //     p.classList.add("remove-text-flairs");
+    //     p.innerHTML = track.author;
+    //     div2.appendChild(p);
+
+    //     div.appendChild(div2);
+    //     trackElement.appendChild(div);
+    // }
+    for (let track of avData.data) {
+        // Main track container with Bulma's "box" and "media" classes
+        let div = document.createElement("div");
+        div.classList.add("box");
+    
         div.dataset.name = track.name;
         div.dataset.path = track.path;
-
+    
+        // Inner media container for Bulma layout
+        let mediaDiv = document.createElement("div");
+        mediaDiv.classList.add("media");
+    
+        // Image container
+        let mediaLeft = document.createElement("div");
+        mediaLeft.classList.add("media-left");
+    
+        let figure = document.createElement("figure");
+        figure.classList.add("image", "is-64x64");
+    
         let img = document.createElement("img");
         img.src = track.image;
-        div.appendChild(img);
-
+        figure.appendChild(img);
+        mediaLeft.appendChild(figure);
+        mediaDiv.appendChild(mediaLeft);
+    
+        // Sprite assignment for img
         const sprite = new Sprite(img);
         sprites.set(div, sprite);
-
-        let div2 = document.createElement("div");
-        div2.classList.add("track-info");
-
+    
+        // Content container
+        let mediaContent = document.createElement("div");
+        mediaContent.classList.add("media-content");
+    
         let h3 = document.createElement("h3");
-        h3.classList.add("remove-text-flairs");
+        h3.classList.add("title", "is-5");
         h3.innerHTML = track.name;
-        div2.appendChild(h3);
-
+        mediaContent.appendChild(h3);
+    
         let p = document.createElement("p");
-        p.classList.add("remove-text-flairs");
+        p.classList.add("subtitle", "is-6");
         p.innerHTML = track.author;
-        div2.appendChild(p);
-
-        div.appendChild(div2);
+        mediaContent.appendChild(p);
+    
+        // Add content to media and media to main div
+        mediaDiv.appendChild(mediaContent);
+        div.appendChild(mediaDiv);
+    
+        // Append to the main track element
         trackElement.appendChild(div);
     }
 

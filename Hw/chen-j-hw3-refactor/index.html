@@ -6,146 +6,172 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>???</title>
     <meta property="og:title" content="Audio Visualizer">
-    <meta property="og:url" content=https://people.rit.edu/jc5892/av/>
-    <meta property="og:description"
-        content="Visualize the harmonious tunes.">
+    <meta property="og:url" content=https://people.rit.edu/jc5892/av />
+    <meta property="og:description" content="Visualize the harmonious tunes.">
     <meta property="og:type" content=website>
     <meta property="og:image:width" content="1080">
     <meta property="og:image:height" content="1080">
     <link rel="icon" type="image/png" sizes="16x16" href="media/favicon.ico">
-    <link href="styles/default-styles.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="src/hamburger.js" defer></script>
     <script src="src/loader.js" type="module"></script>
 </head>
 
 <body>
-    <main>
-        <div class="canvas flex-column">
-            <canvas></canvas>
+    <nav class="navbar is-white has-shadow">
+        <!-- logo / brand -->
+        <div class="navbar-brand">
+            <a class="navbar-item" href="home.html">
+                <i class="fa-solid fa-music"></i>
+            </a>
+            <a class="navbar-burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
 
-            <input type="range" id="progress-bar" min="0" max="100" value="0" step="0.1"
-                title="Progress Viewer/Control">
+        <div class="navbar-menu" id="nav-links">
+            <!-- right links -->
+            <div class="navbar-start">
+                <a class="navbar-item">Home</a>
+                <a class="navbar-item is-hoverable" href="index.html">App</a>
+                <a class="navbar-item is-hoverable" href="data/documentation.txt">Documentation</a>
+            </div>
+        </div>
+    </nav>
 
-            <div id="playback-controls" class="flex-row inline-center">
-                <div id="main-controls">
-                    <button id="btn-play" data-playing="no">
-                        <img class="btn-button" src="https://c.animaapp.com/yPlj5CdF/img/svgexport-83-1.svg"
-                            alt="Play/Pause Button">
-                    </button>
+    <main clas="section">
+        <div class="columns is-multiline">
+            <div class="canvas column is-three-quarters">
+                <div class="box">
+                    <canvas></canvas>
 
-                    <input type="range" id="slider-volume" min="0" max="2" value="1" step="0.01"
-                        aria-label="Volume Control">
-                    <span id="progress-label">??? / ???</span>
+                    <input type="range" id="progress-bar" class="slider is-fullwidth" min="0" max="100" value="0" step="0.1"
+                        title="Progress Viewer/Control">
+
+                    <div id="playback-controls" class="flex-row inline-center">
+                        <div id="main-controls">
+                            <button id="btn-play" data-playing="no" class="button is-primary is-light">
+                                <img class="btn-button" src="https://c.animaapp.com/yPlj5CdF/img/svgexport-83-1.svg"
+                                    alt="Play/Pause Button">
+                            </button>
+
+                            <input type="range" id="slider-volume" min="0" max="2" value="1" step="0.01"
+                                aria-label="Volume Control">
+                            <span id="progress-label">??? / ???</span>
+                        </div>
+
+                        <button id="btn-fs" class="button is-primary is-light">
+                            <img src="https://c.animaapp.com/yPlj5CdF/img/svgexport-95-1.svg" alt="Full Screen Icon">
+                        </button>
+                    </div>
                 </div>
-
-                <button id="btn-fs">
-                    <img src="https://c.animaapp.com/yPlj5CdF/img/svgexport-95-1.svg" alt="Full Screen Icon">
-                </button>
-            </div>
-        </div>
-
-        <div class="tracks flex-column inline-center">
-            <h2 class="remove-text-flairs heading">Available Tracks</h2>
-
-            <div id="track-selection"></div>
-        </div>
-
-        <div class="controls">
-            <div id="visualizer-controls" class="flex-column">
-                <label class="switch">
-                    <span>Visualizer Type (Waveform | Frequency)</span>
-                    <input type="checkbox" id="cb-visualizer">
-                    <span class="slider round"></span>
-                </label>
-
-                <label class="switch">
-                    <span>Show Sprites (Canvas balls)</span>
-                    <input type="checkbox" id="cb-sprites">
-                    <span class="slider round"></span>
-                </label>
-
-                <label class="switch">
-                    <span>Show Gradient (Beasutiful blue, purple, yellow)</span>
-                    <input type="checkbox" id="cb-gradient">
-                    <span class="slider round"></span>
-                </label>
-
-                <label class="switch">
-                    <span>Show Bars (The volumn)</span>
-                    <input type="checkbox" id="cb-bars">
-                    <span class="slider round"></span>
-                </label>
-
-                <label class="switch">
-                    <span>Show Circles (Pulsing center)</span>
-                    <input type="checkbox" id="cb-circles">
-                    <span class="slider round"></span>
-                </label>
-
-                <label class="switch">
-                    <span>Show Inverted (Opposite color)</span>
-                    <input type="checkbox" id="cb-invert">
-                    <span class="slider round"></span>
-                </label>
-
-                <label class="switch">
-                    <span>Show Noise (White stuff)</span>
-                    <input type="checkbox" id="cb-noise">
-                    <span class="slider round"></span>
-                </label>
-
-                <label class="switch">
-                    <span>Show Emboss (Grey scaled?)</span>
-                    <input type="checkbox" id="cb-emboss">
-                    <span class="slider round"></span>
-                </label>
             </div>
 
-            <div id="bass-controls" class="flex-column">
-                <section class="flex-column effects">
-                    <section class="flex-row inline-center">
-                        <h2 class="remove-text-flairs">Bass Gain</h2>
-                        <span id="label-bass-gain">???</span>
-                    </section>
+            <div class="tracks column is-one-quarter">
+                <div class="box">
+                    <h2 class="title is-4 align-center">Available Tracks</h2>
 
-                    <h3 class="remove-text-flairs">Minimum: 0 dB | Maximum: 12 dB</h3>
-                    <input type="range" id="slider-bass-gain" min="0" max="12" value="6" step="1"
-                        title="Bass Gain Control">
-                </section>
-
-                <section class="flex-column effects">
-                    <section class="flex-row inline-center">
-                        <h2 class="remove-text-flairs">Bass Frequency</h2>
-                        <span id="label-bass-frequency">???</span>
-                    </section>
-
-                    <h3 class="remove-text-flairs">Minimum: 20 Hz | Maximum: 250 Hz</h3>
-                    <input type="range" id="slider-bass-frequency" min="20" max="250" value="200" step="5"
-                        title="Bass Frequency Control">
-                </section>
+                    <div id="track-selection"></div>
+                </div>
             </div>
 
-            <div id="treble-controls" class="flex-column">
-                <section class="flex-column effects">
-                    <section class="flex-row inline-center">
-                        <h2 class="remove-text-flairs">Treble Gain</h2>
-                        <span id="label-treble-gain">???</span>
-                    </section>
+            <div class="controls column is-full">
+                <div class="box">
+                    <div id="visualizer-controls" class="flex-column">
+                        <label class="checkbox">
+                            <input type="checkbox" id="cb-visualizer" class="switch">
+                            Visualizer Type
+                        </label>
 
-                    <h3 class="remove-text-flairs">Minimum: 0 dB | Maximum: 12 dB</h3>
-                    <input type="range" id="slider-treble-gain" min="0" max="12" value="4" step="1"
-                        title="Treble Gain Control">
-                </section>
+                        <label class="checkbox">
+                            <input type="checkbox" id="cb-sprites" class="switch">
+                            Show Sprites
+                        </label>
 
-                <section class="flex-column effects">
-                    <section class="flex-row inline-center">
-                        <h2 class="remove-text-flairs">Treble Frequency</h2>
-                        <span id="label-treble-frequency">???</span>
-                    </section>
+                        <label class="checkbox">
+                            <input type="checkbox" id="cb-gradient" class="switch">
+                            Show Gradient
+                        </label>
 
-                    <h3 class="remove-text-flairs">Minimum: 4,000 Hz | Maximum: 20,0000 Hz</h3>
-                    <input type="range" id="slider-treble-frequency" min="4000" max="20000" value="4000" step="500"
-                        title="Treble Frequency Control">
-                </section>
+                        <label class="checkbox">
+                            <input type="checkbox" id="cb-bars" class="switch">
+                            Show Bars
+                        </label>
+
+                        <label class="checkbox">
+                            <input type="checkbox" id="cb-circles" class="switch">
+                            Show Circles
+                        </label>
+
+                        <label class="checkbox">
+                            <input type="checkbox" id="cb-invert" class="switch">
+                            Show Inverted
+                        </label>
+
+                        <label class="checkbox">
+                            <input type="checkbox" id="cb-noise" class="switch">
+                            Show Noise
+                        </label>
+
+                        <label class="checkbox">
+                            <input type="checkbox" id="cb-emboss" class="switch">
+                            Show Emboss
+                        </label>
+                    </div>
+
+                    <div id="bass-controls" class="flex-column">
+                        <section class="flex-column effects">
+                            <section class="flex-row inline-center">
+                                <h2 class="remove-text-flairs">Bass Gain</h2>
+                                <span id="label-bass-gain">???</span>
+                            </section>
+
+                            <h3 class="remove-text-flairs">Minimum: 0 dB | Maximum: 12 dB</h3>
+                            <input type="range" id="slider-bass-gain" min="0" max="12" value="6" step="1"
+                                title="Bass Gain Control">
+                        </section>
+
+                        <section class="flex-column effects">
+                            <section class="flex-row inline-center">
+                                <h2 class="remove-text-flairs">Bass Frequency</h2>
+                                <span id="label-bass-frequency">???</span>
+                            </section>
+
+                            <h3 class="remove-text-flairs">Minimum: 20 Hz | Maximum: 250 Hz</h3>
+                            <input type="range" id="slider-bass-frequency" min="20" max="250" value="200" step="5"
+                                title="Bass Frequency Control">
+                        </section>
+                    </div>
+
+                    <div id="treble-controls" class="flex-column">
+                        <section class="flex-column effects">
+                            <section class="flex-row inline-center">
+                                <h2 class="remove-text-flairs">Treble Gain</h2>
+                                <span id="label-treble-gain">???</span>
+                            </section>
+
+                            <h3 class="remove-text-flairs">Minimum: 0 dB | Maximum: 12 dB</h3>
+                            <input type="range" id="slider-treble-gain" min="0" max="12" value="4" step="1"
+                                title="Treble Gain Control">
+                        </section>
+
+                        <section class="flex-column effects">
+                            <section class="flex-row inline-center">
+                                <h2 class="remove-text-flairs">Treble Frequency</h2>
+                                <span id="label-treble-frequency">???</span>
+                            </section>
+
+                            <h3 class="remove-text-flairs">Minimum: 4,000 Hz | Maximum: 20,0000 Hz</h3>
+                            <input type="range" id="slider-treble-frequency" min="4000" max="20000" value="4000"
+                                step="500" title="Treble Frequency Control">
+                        </section>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

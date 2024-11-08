@@ -12,20 +12,20 @@
     },
     "data": [
         {
-            "name": "Natlan Battle Theme",
-            "author": "HoYo-Mix",
-            "image": "media/Natlan Battle Theme.jpg",
-            "path": "media/Natlan Battle Theme.mp3"
+            "name": "A Dance in Fire",
+            "author": "HOYO-MiX",
+            "image": "media/Natlan Theme.jpeg",
+            "path": "media/Natlan Theme.mp3"
         },
         {
-            "name": "Raiden Shogun Trailer Theme",
-            "author": "HoYo-Mix",
+            "name": "Termination of Desires",
+            "author": "HOYO-MiX",
             "image": "media/Raiden Shogun Trailer Theme.jpg",
             "path": "media/Raiden Shogun Trailer Theme.mp3"
         },
         {
-            "name": "Sumeru Port Ormos OST",
-            "author": "HoYo-Mix",
+            "name": "Hustle and Bustle of Ormos",
+            "author": "HOYO-MiX",
             "image": "media/Sumeru Port Ormos Theme.jpg",
             "path": "media/Sumeru Port Ormos Theme.mp3"
         },
