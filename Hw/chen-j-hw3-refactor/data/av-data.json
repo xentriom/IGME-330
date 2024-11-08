@@ -12,28 +12,28 @@
     },
     "data": [
         {
-            "name": "A Dance in Fire",
-            "author": "HOYO-MiX",
-            "image": "media/Natlan Theme.jpeg",
-            "path": "media/Natlan Theme.mp3"
+            "name": "Passing Memories",
+            "author": "HOYO-MiX, Faouzia",
+            "image": "assets/media/Passing Memories.jpeg",
+            "path": "assets/audio/Passing Memories.mp3"
         },
         {
-            "name": "Termination of Desires",
-            "author": "HOYO-MiX",
-            "image": "media/Raiden Shogun Trailer Theme.jpg",
-            "path": "media/Raiden Shogun Trailer Theme.mp3"
+            "name": "Hope Is the Thing With Feathers",
+            "author": "Robin, HOYO-MiX, Chevy",
+            "image": "assets/media/Hope Is the Thing With Feathers.jpeg",
+            "path": "assets/audio/Hope Is the Thing With Feathers.mp3"
         },
         {
-            "name": "Hustle and Bustle of Ormos",
+            "name": "No Ceiling",
             "author": "HOYO-MiX",
-            "image": "media/Sumeru Port Ormos Theme.jpg",
-            "path": "media/Sumeru Port Ormos Theme.mp3"
+            "image": "assets/media/No Ceiling.jpeg",
+            "path": "assets/audio/No Ceiling.mp3"
         },
         {
-            "name": "[Testing] Pink Noise",
-            "author": "DigitalSpa",
-            "image": "media/Pink Noise.webp",
-            "path": "media/Pink Noise.mp3"
+            "name": "Burning Desires",
+            "author": "Sān-Z, HOYO-MiX",
+            "image": "assets/media/Burning Desires.jpeg",
+            "path": "assets/audio/Burning Desires.mp3"
         }
     ]
 }

@@ -6,7 +6,7 @@ import { Sprite } from './Sprite.js';
 let avData;
 
 const DEFAULTS = Object.freeze({
-    sound1: "./media/Natlan Theme.mp3"
+    sound1: "./assets/audio/Passing Memories.mp3"
 });
 
 const preload = async () => {
