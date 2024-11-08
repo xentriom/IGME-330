@@ -1,4 +1,4 @@
-html,
+/* html,
 body {
     margin: 0px;
     padding: 0px;
@@ -229,4 +229,26 @@ input:checked+.slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+} */
+
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(180, 220, 255);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.section {
+    padding: 1.5rem;
+}
+
+.slider {
+    width: 100%;
+}
+
+/* Override last child rule in Bulma for treble */
+#treble-controls {
+    margin-bottom: 1.5rem;
 }
