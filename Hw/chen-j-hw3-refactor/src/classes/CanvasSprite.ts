@@ -1,5 +1,12 @@
-class CanvasSprite {
-    constructor(x, y, size, color, scale = 1) {
+export class CanvasSprite {
+    x: number;
+    y: number;
+    size: number;
+    color: string;
+    scale: number;
+    velocity: { x: number, y: number };
+
+    constructor(x: number, y: number, size: number, color: string, scale: number = 1) {
         this.x = x;
         this.y = y;
         this.size = size;
@@ -8,8 +15,8 @@ class CanvasSprite {
         this.velocity = { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1 };
     }
 
-    update(audioData, canvasWidth, canvasHeight) {
-        const percent = audioData.reduce((a, b) => a + b) / (audioData.length * 255);
+    update(audioData: Uint8Array, canvasWidth: number, canvasHeight: number): void {
+        const percent = audioData.reduce((a, b) => a + b, 0) / (audioData.length * 255);
 
         // update size and position
         this.size = Math.max(percent * 100 * this.scale, 20);
@@ -27,7 +34,7 @@ class CanvasSprite {
         }
     }
 
-    draw(ctx) {
+    draw(ctx: CanvasRenderingContext2D): void {
         ctx.save();
         ctx.fillStyle = this.color;
         ctx.beginPath();
@@ -36,5 +43,3 @@ class CanvasSprite {
         ctx.restore();
     }
 }
-
-export { CanvasSprite };

@@ -1,11 +1,20 @@
-import * as utils from './utils.js';
-import { CanvasSprite } from './CanvasSprite.js';
+import * as utils from './utils';
+import { CanvasSprite } from './classes/CanvasSprite';
+import { DrawParams } from './interfaces/drawParams.interface';
 
-let ctx, canvasWidth, canvasHeight, gradient, analyserNode, audioData;
-let sprite1, sprite2, sprite3;
+let ctx: CanvasRenderingContext2D;
+let canvasWidth: number;
+let canvasHeight: number;
+let gradient: CanvasGradient;
+let analyserNode: AnalyserNode;
+let audioData: Uint8Array;
 
-const setupCanvas = (canvasElement, analyserNodeRef) => {
-    ctx = canvasElement.getContext("2d");
+let sprite1: CanvasSprite;
+let sprite2: CanvasSprite;
+let sprite3: CanvasSprite;
+
+const setupCanvas = (canvasElement: HTMLCanvasElement, analyserNodeRef: AnalyserNode): void => {
+    ctx = canvasElement.getContext("2d")!;
     canvasWidth = canvasElement.width;
     canvasHeight = canvasElement.height;
 
@@ -24,11 +33,22 @@ const setupCanvas = (canvasElement, analyserNodeRef) => {
     sprite3 = new CanvasSprite(100, 100, 10, 'rgba(0, 255, 0, 0.2)', 0.25);
 }
 
-const draw = (params = {}) => {
+const draw = (params: DrawParams = {
+    visualizerType: false,
+    showSprites: false,
+    showGradient: false,
+    showBars: false,
+    showCircles: false, 
+    showNoise: false,
+    showInvert: false,
+    showEmboss: false
+}) => {
     // draw visualizer depending on the type
-    params.visualizerType
-        ? analyserNode.getByteFrequencyData(audioData)
-        : analyserNode.getByteTimeDomainData(audioData);
+    if (params.visualizerType) {
+        analyserNode.getByteFrequencyData(audioData);
+    } else {
+        analyserNode.getByteTimeDomainData(audioData);
+    }
 
     ctx.save();
     ctx.fillStyle = "black";

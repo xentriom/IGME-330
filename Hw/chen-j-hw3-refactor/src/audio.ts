@@ -1,23 +1,15 @@
-let audioCtx;
-let element, sourceNode, analyserNode, gainNode, bassFilter, trebleFilter;
+import { Defaults, BiquadDefaults } from "./enums/audio-defaults.enum";
 
-const Defaults = Object.freeze({
-    GAIN: .5,
-    NUM_SAMPLE: 256
-});
+let audioCtx: AudioContext;
+let element: HTMLAudioElement;
+let sourceNode: MediaElementAudioSourceNode;
+let analyserNode: AnalyserNode;
+let gainNode: GainNode;
+let bassFilter: BiquadFilterNode;
+let trebleFilter: BiquadFilterNode;
 
-// defaults for biquad filter
-const BiquadDefaults = Object.freeze({
-    BASS_FREQ: 200,
-    BASS_GAIN: 6,
-    TREBLE_FREQ: 4000,
-    TREBLE_GAIN: 4
-});
-
-let audioData = new Uint8Array(Defaults.NUM_SAMPLE / 2);
-
-const setupWebaudio = (filePath) => {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
+const setupWebaudio = (filePath: string): void => {
+    const AudioContext = window.AudioContext;
 
     audioCtx = new AudioContext();
     element = new Audio();
@@ -53,46 +45,47 @@ const setupWebaudio = (filePath) => {
     gainNode.connect(audioCtx.destination);
 }
 
-const loadSoundFile = (filePath) => element.src = filePath;
+const loadSoundFile = (filePath: string): void => {
+    element.src = filePath
+};
 
-const playCurrentSound = () => element.play();
+const playCurrentSound = (): void => {
+    element.play()
+};
 
-const pauseCurrentSound = () => element.pause();
+const pauseCurrentSound = (): void => {
+    element.pause()
+};
 
-const setVolume = (value) => {
-    value = Number(value);
+const setVolume = (value: number): void => {
     gainNode.gain.value = value;
 }
 
-const setBassFrequency = (value) => {
-    value = Number(value);
+const setBassFrequency = (value: number): void => {
     bassFilter.frequency.setValueAtTime(value, audioCtx.currentTime);
 }
 
-const setBassGain = (value) => {
-    value = Number(value);
+const setBassGain = (value: number): void => {
     bassFilter.gain.setValueAtTime(value, audioCtx.currentTime);
 }
 
-const setTrebleFrequency = (value) => {
-    value = Number(value);
+const setTrebleFrequency = (value: number): void => {
     trebleFilter.frequency.setValueAtTime(value, audioCtx.currentTime);
 }
 
-const setTrebleGain = (value) => {
-    value = Number(value);
+const setTrebleGain = (value: number): void => {
     trebleFilter.gain.setValueAtTime(value, audioCtx.currentTime);
 }
 
-const getCurrentTime = () => {
+const getCurrentTime = (): number => {
     return element.currentTime;
 };
 
-const getDuration = () => {
+const getDuration = (): number => {
     return element.duration;
 };
 
-const seekTo = (time) => {
+const seekTo = (time: number): void => {
     element.currentTime = time;
 };
 

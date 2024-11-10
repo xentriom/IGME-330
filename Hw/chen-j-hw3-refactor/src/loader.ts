@@ -1,6 +1,6 @@
-import * as main from "./main.js";
+import * as main from "./main";
 
-const load = async () => {
+const load = async (): Promise<void> => {
 	const data = await main.preload();
 	document.title = data.title;
 

@@ -1,40 +1,39 @@
-import * as utils from './utils.js';
-import * as audio from './audio.js';
-import * as canvas from './canvas.js';
-import { Sprite } from './Sprite.js';
+import * as utils from './utils';
+import * as audio from './audio';
+import * as canvas from './canvas';
+import { Sprite } from './classes/Sprite';
+import { DEFAULTS } from './enums/main-defaults.enum';
+import { DrawParams } from './interfaces/drawParams.interface';
+import { AVData } from './interfaces/avData.interface';
+import { ToggleButtons } from './enums/toggle-buttons.enum';
 
-let avData;
+let avData: AVData;
 
-const DEFAULTS = Object.freeze({
-    sound1: "./assets/audio/Passing Memories.mp3"
-});
-
-const preload = async () => {
+const preload = async (): Promise<AVData> => {
     // fetch and store the data
     const response = await fetch("data/av-data.json");
-    const data = await response.json();
-    avData = data;
+    avData = await response.json() as AVData;
 
-    return data;
+    return avData;
 }
 
-const init = () => {
+const init = (): void => {
     audio.setupWebaudio(DEFAULTS.sound1);
 
     // set up canvas ui
-    let canvasElement = document.querySelector("canvas");
+    let canvasElement = document.querySelector("canvas") as HTMLCanvasElement;
     setupUI(canvasElement);
     canvas.setupCanvas(canvasElement, audio.analyserNode);
 
     // set up track selection
-    let trackElement = document.querySelector("#track-selection");
+    let trackElement = document.querySelector("#track-selection") as HTMLElement;
     setupTracks(trackElement);
 
     loop();
 }
 
-const setupTracks = (trackElement) => {
-    const sprites = new Map();
+const setupTracks = (trackElement: HTMLElement): void => {
+    const sprites = new Map<HTMLElement, Sprite>();
 
     // create a div for each track
     for (let track of avData.data) {
@@ -82,59 +81,68 @@ const setupTracks = (trackElement) => {
 
     // start the first sprite rotation
     const initSpirte = sprites.values().next().value;
-    initSpirte.startRotation();
+    initSpirte?.startRotation();
 
     // set up click event
-    const playButton = document.querySelector("#btn-play");
-    const playButtonImage = playButton.querySelector("img");
-    trackElement.onclick = e => {
-        const trackDiv = e.target.closest(".box");
+    const playButton = document.querySelector("#btn-play") as HTMLButtonElement;
+    const playButtonImage = playButton.querySelector("img") as HTMLImageElement;
+
+    trackElement.onclick = (e: Event) => {
+        const trackDiv = (e.target as HTMLElement).closest(".box") as HTMLElement;
 
         if (trackDiv) {
             const trackPath = trackDiv.dataset.path;
-            audio.loadSoundFile(trackPath);
+            if (trackPath) {
+                audio.loadSoundFile(trackPath);
 
-            // rotate the playing sprite
-            sprites.forEach((s, div) => {
-                div === trackDiv ? s.startRotation() : s.stopRotation();
-            });
+                sprites.forEach((sprite, div) => {
+                    div === trackDiv ? sprite.startRotation() : sprite.stopRotation();
+                });
 
-            playButtonImage.src = utils.ToggleButtons.PAUSE;
+                playButtonImage.src = ToggleButtons.PAUSE;
+            }
         }
     }
 }
 
-const setupUI = (canvasElement) => {
+const setupUI = (canvasElement: HTMLCanvasElement): void => {
+    const burgerIcon = document.querySelector('#burger') as HTMLElement;
+    const navbarMenu = document.querySelector('#nav-links') as HTMLElement;
+
+    burgerIcon.addEventListener('click', () => {
+        navbarMenu.classList.toggle('is-active');
+    });
+
     // full screen button
-    const fsButton = document.querySelector("#btn-fs");
-    fsButton.onclick = e => {
-        utils.goFullscreen(canvasElement);
-    };
+    const fsButton = document.querySelector("#btn-fs") as HTMLButtonElement;
+    fsButton.onclick = () => utils.goFullscreen(canvasElement);
 
     // play/pause button
-    const playButton = document.querySelector("#btn-play");
-    const playButtonImage = playButton.querySelector("img");
-    playButton.onclick = e => {
-        if (audio.audioCtx.state == "suspended") {
+    const playButton = document.querySelector("#btn-play") as HTMLButtonElement;
+    const playButtonImage = playButton.querySelector("img") as HTMLImageElement;
+    playButton.onclick = (e: MouseEvent) => {
+        const target = e.currentTarget as HTMLButtonElement;
+
+        if (audio.audioCtx.state === "suspended") {
             audio.audioCtx.resume();
         }
 
-        if (e.target.dataset.playing == "no") {
+        if (target.dataset.playing === "no") {
             audio.playCurrentSound();
-            e.target.dataset.playing = "yes"; //our css will set the text to "Pause", no it will not
-            playButtonImage.src = utils.ToggleButtons.PLAY;
-        }
-        else {
+            target.dataset.playing = "yes";
+            playButtonImage.src = ToggleButtons.PLAY;
+        } else {
             audio.pauseCurrentSound();
-            e.target.dataset.playing = "no";// our CSS will set the text to "Play", no it will not
-            playButtonImage.src = utils.ToggleButtons.PAUSE;
+            target.dataset.playing = "no";
+            playButtonImage.src = ToggleButtons.PAUSE;
         }
     };
 
     // volume slider
-    let volumeSlider = document.querySelector("#slider-volume");
-    volumeSlider.oninput = e => {
-        audio.setVolume(e.target.value);
+    let volumeSlider = document.querySelector("#slider-volume") as HTMLInputElement;
+    volumeSlider.oninput = (e: Event) => {
+        const target = e.target as HTMLInputElement;
+        audio.setVolume(Number(target.value));
     };
     volumeSlider.dispatchEvent(new Event("input"));
 
@@ -159,22 +167,22 @@ const setupUI = (canvasElement) => {
     ];
 
     checkboxes.forEach(({ id, param }) => {
-        const checkbox = document.querySelector(`#${id}`);
-        checkbox.checked = avData.drawParams[param];
+        const checkbox = document.querySelector(`#${id}`) as HTMLInputElement;
+        checkbox.checked = avData.drawParams[param as keyof DrawParams];
         checkbox.onchange = () => {
-            avData.drawParams[param] = checkbox.checked;
+            avData.drawParams[param as keyof DrawParams] = checkbox.checked;
         };
     });
 
-    // progress bar
-    const progressBar = document.querySelector("#progress-bar");
-    progressBar.oninput = e => {
-        let newTime = audio.getDuration() * (e.target.value / 100);
+    const progressBar = document.querySelector("#progress-bar") as HTMLInputElement;
+    progressBar.oninput = (e: Event) => {
+        const target = e.target as HTMLInputElement;
+        const newTime = audio.getDuration() * (Number(target.value) / 100);
         audio.seekTo(newTime);
-    }
+    };
 }
 
-const loop = () => {
+const loop = (): void => {
     setTimeout(loop, 1000 / 60);
     canvas.draw(avData.drawParams);
     updateProgress();
@@ -183,15 +191,15 @@ const loop = () => {
 /**
  * update the progress bar and label
  */
-const updateProgress = () => {
-    const progressBar = document.querySelector("#progress-bar");
-    const progressLabel = document.querySelector("#progress-label");
+const updateProgress = (): void => {
+    const progressBar = document.querySelector("#progress-bar") as HTMLInputElement;
+    const progressLabel = document.querySelector("#progress-label") as HTMLElement;
 
     const currentTime = audio.getCurrentTime();
     const duration = audio.getDuration();
 
     if (duration > 0) {
-        progressBar.value = (currentTime / duration) * 100;
+        progressBar.value = ((currentTime / duration) * 100).toString();
         progressLabel.innerHTML = `${utils.formatTime(currentTime)} / ${utils.formatTime(duration)}`;
     }
 }
