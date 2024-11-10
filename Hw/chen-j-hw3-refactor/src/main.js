@@ -39,7 +39,7 @@ const setupTracks = (trackElement) => {
     // create a div for each track
     for (let track of avData.data) {
         let div = document.createElement("div");
-        div.classList.add("box", "track", "track-info", "mb-5");
+        div.classList.add("box", "tracks", "track-info", "mb-5");
         div.dataset.name = track.name;
         div.dataset.path = track.path;
 
