@@ -90,3 +90,7 @@ canvas {
 #controls {
     background-color: rgb(225, 227, 255);
 }
+
+button {
+    background-color: rgba(0, 0, 0, 0)!important;
+}
