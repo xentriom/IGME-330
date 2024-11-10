@@ -1,11 +1,6 @@
-html,
-body {
-    margin: 0px;
-    padding: 0px;
+html {
     background-color: rgb(180, 220, 255);
-    height: 100vh;
 }
-
 
 
 
@@ -19,11 +14,9 @@ body {
 }
 
 /* Override last child rule in Bulma for treble */
-#treble-controls {
-    margin-bottom: 1.5rem;
+#visualizer-controls, #bass-controls, #treble-controls {
+    margin-bottom: 0px;
 }
-
-
 
 
 
@@ -31,28 +24,11 @@ body {
 /* Add ponter and hover functionality to tracks, disk image */
 .track {
     cursor: pointer;
-    margin-bottom: 1.3rem!important;
 }
 
 .track:hover {
     background-color: rgb(136, 136, 238);
 }
-
-#track-info {
-    margin-bottom: 1rem;
-}
-
-#track-title {
-    margin-bottom: 1rem;
-}
-
-.track img {
-    border-radius: 50%;
-    margin: 5%;
-}
-
-
-
 
 
 
@@ -90,17 +66,13 @@ canvas {
 }
 
 #playback-controls {
-    display: flex;
     background-color: rgba(0, 0, 0, 0.4);
+    /* Tried using is-justify-content-space-between in the class but it didnt work */
     justify-content: space-between;
-    width: 100%;
+
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
-    align-self: center;
-    margin-top: 0;
-    padding: 0;
 }
-
 
 #controls-section {
     padding: .75rem;

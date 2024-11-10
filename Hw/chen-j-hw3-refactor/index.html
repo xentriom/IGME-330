@@ -21,7 +21,7 @@
     <script src="src/loader.js" type="module"></script>
 </head>
 
-<body>
+<body class="mg-0 p-0">
     <nav class="navbar is-white has-shadow">
         <!-- logo / brand -->
         <div class="navbar-brand">
@@ -50,22 +50,19 @@
             <div class="column is-two-thirds">
                 <div id="playback" class="box">
                     <canvas></canvas>
-
-                    <input type="range" id="progress-bar" class="slider is-fullwidth" min="0" max="100" value="0"
-                        step="0.1" title="Progress Viewer/Control">
-
-                    <div id="playback-controls" class="flex-row inline-center">
-                        <div id="main-controls">
+            
+                    <input type="range" id="progress-bar" class="progress is-fullwidth" min="0" max="100" value="0" step="0.1" title="Progress Viewer/Control">
+            
+                    <div id="playback-controls" class="is-flex align-items-center">
+                        <div id="main-controls" class="is-flex align-items-center">
                             <button id="btn-play" data-playing="no" class="button is-primary is-dark">
-                                <img class="btn-button" src="https://c.animaapp.com/yPlj5CdF/img/svgexport-83-1.svg"
-                                    alt="Play/Pause Button">
+                                <img class="btn-button" src="https://c.animaapp.com/yPlj5CdF/img/svgexport-83-1.svg" alt="Play/Pause Button">
                             </button>
-
-                            <input type="range" id="slider-volume" min="0" max="2" value="1" step="0.01"
-                                aria-label="Volume Control">
-                            <span id="progress-label">??? / ???</span>
+            
+                            <input type="range" id="slider-volume" class="ml-2" min="0" max="2" value="1" step="0.01" aria-label="Volume Control">
+                            <span id="progress-label" class="ml-2">??? / ???</span>
                         </div>
-
+            
                         <button id="btn-fs" class="button is-primary is-dark">
                             <img src="https://c.animaapp.com/yPlj5CdF/img/svgexport-95-1.svg" alt="Full Screen Icon">
                         </button>
@@ -74,15 +71,15 @@
             </div>
 
             <div class="tracks column is-one-third">
-                <div class="box">
-                    <!-- <h2 id="track-title" class="title is-4 has-text-centered">Available Tracks</h2> -->
+                <div class="box has-background-link-light">
+                    <h2 id="track-title" class="title is-4 has-text-centered">Available Tracks</h2>
                     <div id="track-selection"></div>
                 </div>
             </div>
 
             <div class="controls column is-full">
-                <div id="controls-section" class="columns is-flex is-justify-content-space-evenly">
-                    <div id="visualizer-controls" class="box is-flex column is-one-third">
+                <div class="box is-flex">
+                    <div id="visualizer-controls" class="box column is-flex is-one-third">
                         <div class="">
                             <div class="field">
                                 <label class="checkbox">
@@ -151,7 +148,7 @@
                         </div>
                     </div>
 
-                    <div id="treble-controls" class="box column is-flex is-one-third">
+                    <div id="treble-controls" class="box column is-one-third is-flex">
                         <div class="field">
                             <label class="label">Treble Gain <span id="label-treble-gain"
                                     class="has-text-weight-light ml-2">???</span></label>
