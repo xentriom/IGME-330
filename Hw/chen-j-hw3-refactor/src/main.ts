@@ -147,12 +147,32 @@ const setupUI = (canvasElement: HTMLCanvasElement): void => {
     volumeSlider.dispatchEvent(new Event("input"));
 
     // Set up bass sliders
-    utils.setupSlider("#slider-bass-frequency", "#label-bass-frequency", "Hz", audio.setBassFrequency);
-    utils.setupSlider("#slider-bass-gain", "#label-bass-gain", "dB", audio.setBassGain);
+    utils.setupSlider({
+        sliderId: "#slider-bass-frequency",
+        labelId: "#label-bass-frequency",
+        unit: "Hz",
+        setValueCallback: audio.setBassFrequency
+    });
+    utils.setupSlider({
+        sliderId: "#slider-bass-gain",
+        labelId: "#label-bass-gain",
+        unit: "dB",
+        setValueCallback: audio.setBassGain
+    });
 
     // Set up treble sliders
-    utils.setupSlider("#slider-treble-frequency", "#label-treble-frequency", "Hz", audio.setTrebleFrequency);
-    utils.setupSlider("#slider-treble-gain", "#label-treble-gain", "dB", audio.setTrebleGain);
+    utils.setupSlider({
+        sliderId: "#slider-treble-frequency",
+        labelId: "#label-treble-frequency",
+        unit: "Hz",
+        setValueCallback: audio.setTrebleFrequency
+    });
+    utils.setupSlider({
+        sliderId: "#slider-treble-gain",
+        labelId: "#label-treble-gain",
+        unit: "dB",
+        setValueCallback: audio.setTrebleGain
+    });
 
     // instand of previous verisons, i went with a more compact way
     const checkboxes = [

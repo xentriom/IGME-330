@@ -1,4 +1,5 @@
 import { ColorStop } from "./interfaces/colorStop.interface";
+import { SliderConfig } from "./interfaces/sliderConfig.interface";
 
 const makeColor = (red: number, green: number, blue: number, alpha: number = 1): string => {
     return `rgba(${red},${green},${blue},${alpha})`;
@@ -29,13 +30,13 @@ const goFullscreen = (element: HTMLElement): void => {
     }
 };
 
-const setupSlider = (sliderId: string, labelId: string, unit: string, setValueCallback: any): void => {
+const setupSlider = ({ sliderId, labelId, unit, setValueCallback }: SliderConfig): void => {
     let slider = document.querySelector(sliderId) as HTMLInputElement;
     let label = document.querySelector(labelId) as HTMLLabelElement;
 
     slider.oninput = e => {
         if (e.target) {
-            setValueCallback((e.target as HTMLInputElement).value);
+            setValueCallback(Number((e.target as HTMLInputElement).value));
             label.innerHTML = `${(e.target as HTMLInputElement).value} ${unit}`;
         }
     };
