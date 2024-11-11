@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audio Visualizer | About</title>
     <meta property="og:title" content="Audio Visualizer | About">
-    <meta property="og:url" content=https://people.rit.edu/jc5892/av/>
+    <meta property="og:url" content=https://people.rit.edu/jc5892/av>
     <meta property="og:description" content="Visualize the harmonious tunes.">
     <meta property="og:type" content=website>
     <meta property="og:image:width" content="1080">
@@ -21,10 +21,9 @@
 
 <body>
     <nav class="navbar is-white has-shadow">
-        <!-- logo / brand -->
         <div class="navbar-brand">
             <a class="navbar-item" href="home.html">
-                <i class="fa-solid fa-music"></i>
+                <img src="./assets/Audio Visualizer.png" alt="logo" style="max-width: auto;">
             </a>
             <a class="navbar-burger" id="burger">
                 <span></span>
@@ -34,7 +33,6 @@
         </div>
 
         <div class="navbar-menu" id="nav-links">
-            <!-- right links -->
             <div class="navbar-start">
                 <a class="navbar-item">Home</a>
                 <a class="navbar-item is-hoverable" href="index.html">App</a>
@@ -43,21 +41,31 @@
         </div>
     </nav>
 
-    <!-- product info -->
-    <section class="section has-background-primary">
+    <div class="section has-background-info-light is-flex is-align-items-center is-fullheight-with-navbar" style="height: 100vh;">
         <div class="container">
-            <div class="column">
-                <div class="hero is-large is-info p-2">
-                    <div class="hero-head">
-                        <p class="title">Audio Visualizer</p>
-                        <p class="subtitle">Your first stop to visualizing some audio!</p>
-                        <img class="p-3" style="float:right;width:50%" src="media/Audio Visualizer.webp" alt="dog">
+            <div class="columns is-vcentered">
+                <div class="column is-half">
+                    <div class="hero">
+                        <div class="hero-body has-text-centered">
+                            <p class="title is-1 mb-7" style="color: #333;">Audio Visualizer</p>
+                            <p class="subtitle is-4 mb-6" style="color: #555;">
+                                Your first stop to visualizing some pre-selected audio from HOYO-MiX! Sit back and enjoy the beats.
+                            </p>
+                            
+                            <button class="button is-dark is-rounded is-medium mt-5" onclick="window.location.href='index.html'">
+                                Visit App
+                            </button>
+                            
+                            <p class="subtitle is-6 mt-6" style="color: #777;">Contact: jc5892@rit.edu</p>
+                        </div>
                     </div>
-                    <div class="hero-footer">Contact: jc5892@rit.edu</div>
+                </div>
+                <div class="column is-half has-text-centered">
+                    <img class="p-3" style="max-width: 80%;" src="./assets/Audio Visualizer.png" alt="logo">
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </body>
 
 </html>

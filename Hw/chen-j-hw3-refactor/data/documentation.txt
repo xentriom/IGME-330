@@ -24,3 +24,22 @@ Notes:
 i deleted the comments that came from pe08 since theyre redundant, you
 know what they are and what they do, youve probably seen those comments one too many times.
 i added basic comments for what each thing does.
+
+==============================
+=== HW3 DOCUMENTATION PART ===
+==============================
+
+Language Used: TypeScript
+I changed every js file into ts and used ts for the entire project
+
+Aesthics:
+A few things changed such as more consistent color themeing. Due to the navbar i had to remove one of the
+audio files to let them fit inside the container
+
+Bulma / CSS:
+There is a few pure/raw CSS since doing it the Bulma way did not work at all or 
+i needed the customization of pure CSS such as specific background colors. I provided more
+details in the css file.
+
+Home:
+For the home.html i used inline styles/scripts since creating a new file for that small function isnt worth it

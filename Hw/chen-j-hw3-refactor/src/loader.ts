@@ -4,7 +4,12 @@ const load = async (): Promise<void> => {
 	const data = await main.preload();
 	document.title = data.title;
 
-	main.init();
+	try {
+		main.init();
+	}
+	catch {
+		// ignore
+	}
 }
 
 load();

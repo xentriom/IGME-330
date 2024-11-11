@@ -106,6 +106,7 @@ const setupTracks = (trackElement: HTMLElement): void => {
 }
 
 const setupUI = (canvasElement: HTMLCanvasElement): void => {
+    // burger menu
     const burgerIcon = document.querySelector('#burger') as HTMLElement;
     const navbarMenu = document.querySelector('#nav-links') as HTMLElement;
 

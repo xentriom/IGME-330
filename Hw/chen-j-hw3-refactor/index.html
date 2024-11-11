@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>???</title>
     <meta property="og:title" content="Audio Visualizer">
-    <meta property="og:url" content=https://people.rit.edu/jc5892/av/>
+    <meta property="og:url" content=https://people.rit.edu/jc5892/av>
     <meta property="og:description" content="Visualize the harmonious tunes.">
     <meta property="og:type" content=website>
     <meta property="og:image:width" content="1080">
@@ -25,7 +25,7 @@
         <!-- logo / brand -->
         <div class="navbar-brand">
             <a class="navbar-item" href="home.html">
-                <i class="fa-solid fa-music"></i>
+                <img src="./assets/Audio Visualizer.png" alt="logo" style="max-width: auto;">
             </a>
             <a class="navbar-burger" id="burger">
                 <span></span>
@@ -49,19 +49,22 @@
             <div class="column is-two-thirds">
                 <div id="playback" class="box">
                     <canvas></canvas>
-            
-                    <input type="range" id="progress-bar" class="progress is-fullwidth" min="0" max="100" value="0" step="0.1" title="Progress Viewer/Control">
-            
+
+                    <input type="range" id="progress-bar" class="progress is-fullwidth" min="0" max="100" value="0"
+                        step="0.1" title="Progress Viewer/Control">
+
                     <div id="playback-controls" class="is-flex align-items-center">
                         <div id="main-controls" class="is-flex align-items-center">
                             <button id="btn-play" data-playing="no" class="button is-dark">
-                                <img class="btn-button" src="https://c.animaapp.com/yPlj5CdF/img/svgexport-83-1.svg" alt="Play/Pause Button">
+                                <img class="btn-button" src="https://c.animaapp.com/yPlj5CdF/img/svgexport-83-1.svg"
+                                    alt="Play/Pause Button">
                             </button>
-            
-                            <input type="range" id="slider-volume" class="ml-2" min="0" max="2" value="1" step="0.01" aria-label="Volume Control">
+
+                            <input type="range" id="slider-volume" class="ml-2" min="0" max="2" value="1" step="0.01"
+                                aria-label="Volume Control">
                             <span id="progress-label" class="ml-2">??? / ???</span>
                         </div>
-            
+
                         <button id="btn-fs" class="button is-dark">
                             <img src="https://c.animaapp.com/yPlj5CdF/img/svgexport-95-1.svg" alt="Full Screen Icon">
                         </button>
