@@ -67,14 +67,14 @@ const draw = (params: DrawParams = {
 
     // show bars
     if (params.showBars) {
-        let barSpacing = 2;
-        let margin = 0;
-        let screenWidthForBars = canvasWidth - (audioData.length * barSpacing) - margin;
-        let barWidth = screenWidthForBars / audioData.length;
+        const barSpacing = 2;
+        const margin = 0;
+        const screenWidthForBars = canvasWidth - (audioData.length * barSpacing) - margin;
+        const barWidth = screenWidthForBars / audioData.length;
 
         ctx.save();
 
-        let gradient = ctx.createLinearGradient(0, canvasHeight, 0, 0);
+        const gradient = ctx.createLinearGradient(0, canvasHeight, 0, 0);
         gradient.addColorStop(0, 'rgba(255,255,255,0.85)');
         gradient.addColorStop(1, 'rgba(255,105,180,0.85)');
 
@@ -84,9 +84,9 @@ const draw = (params: DrawParams = {
         ctx.lineJoin = 'round';
 
         for (let i = 0; i < audioData.length; i++) {
-            let barHeight = Math.max((audioData[i] / 255) * canvasHeight * 0.8, 1);
-            let x = margin + i * (barWidth + barSpacing);
-            let y = canvasHeight - barHeight;
+            const barHeight = Math.max((audioData[i] / 255) * canvasHeight * 0.8, 1);
+            const x = margin + i * (barWidth + barSpacing);
+            const y = canvasHeight - barHeight;
 
             ctx.fillRect(Math.floor(x), Math.floor(y), Math.ceil(barWidth), Math.ceil(barHeight));
             ctx.strokeRect(Math.floor(x), Math.floor(y), Math.ceil(barWidth), Math.ceil(barHeight));
@@ -97,9 +97,9 @@ const draw = (params: DrawParams = {
 
     // show circles
     if (params.showCircles) {
-        let maxRadius = canvasHeight / 4;
-        let centerX = canvasWidth / 2;
-        let centerY = canvasHeight / 2;
+        const maxRadius = canvasHeight / 4;
+        const centerX = canvasWidth / 2;
+        const centerY = canvasHeight / 2;
 
         ctx.save();
         ctx.globalAlpha = 0.5;
@@ -146,10 +146,10 @@ const draw = (params: DrawParams = {
         sprite3.draw(ctx);
     }
 
-    let imageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
-    let data = imageData.data;
-    let length = data.length;
-    let width = imageData.width;
+    const imageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
+    const data = imageData.data;
+    const length = data.length;
+    const width = imageData.width;
 
     for (let i = 0; i < length; i += 4) {
         // show noise

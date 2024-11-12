@@ -16,8 +16,8 @@ const getRandomColor = (): string => {
 };
 
 const getLinearGradient = (ctx: CanvasRenderingContext2D, startX: number, startY: number, endX: number, endY: number, colorStops: ColorStop[]): CanvasGradient => {
-    let lg = ctx.createLinearGradient(startX, startY, endX, endY);
-    for (let stop of colorStops) {
+    const lg = ctx.createLinearGradient(startX, startY, endX, endY);
+    for (const stop of colorStops) {
         lg.addColorStop(stop.percent, stop.color);
     }
     return lg;
@@ -31,8 +31,8 @@ const goFullscreen = (element: HTMLElement): void => {
 };
 
 const setupSlider = ({ sliderId, labelId, unit, setValueCallback }: SliderConfig): void => {
-    let slider = document.querySelector(sliderId) as HTMLInputElement;
-    let label = document.querySelector(labelId) as HTMLLabelElement;
+    const slider = document.querySelector(sliderId) as HTMLInputElement;
+    const label = document.querySelector(labelId) as HTMLLabelElement;
 
     slider.oninput = e => {
         if (e.target) {

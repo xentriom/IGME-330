@@ -2,7 +2,7 @@ import * as utils from './utils';
 import * as audio from './audio';
 import * as canvas from './canvas';
 import { Sprite } from './classes/Sprite';
-import { DEFAULTS } from './enums/main-defaults.enum';
+import { Defaults } from './enums/main-defaults.enum';
 import { DrawParams } from './interfaces/drawParams.interface';
 import { AVData } from './interfaces/avData.interface';
 import { ToggleButtons } from './enums/toggle-buttons.enum';
@@ -18,15 +18,15 @@ const preload = async (): Promise<AVData> => {
 }
 
 const init = (): void => {
-    audio.setupWebaudio(DEFAULTS.sound1);
+    audio.setupWebaudio(Defaults.SOUND_ONE);
 
     // set up canvas ui
-    let canvasElement = document.querySelector("canvas") as HTMLCanvasElement;
+    const canvasElement = document.querySelector("canvas") as HTMLCanvasElement;
     setupUI(canvasElement);
     canvas.setupCanvas(canvasElement, audio.analyserNode);
 
     // set up track selection
-    let trackElement = document.querySelector("#track-selection") as HTMLElement;
+    const trackElement = document.querySelector("#track-selection") as HTMLElement;
     setupTracks(trackElement);
 
     loop();
@@ -36,22 +36,22 @@ const setupTracks = (trackElement: HTMLElement): void => {
     const sprites = new Map<HTMLElement, Sprite>();
 
     // create a div for each track
-    for (let track of avData.data) {
+    for (const track of avData.data) {
         let div = document.createElement("div");
         div.classList.add("box", "tracks", "track-info", "mb-5");
         div.dataset.name = track.name;
         div.dataset.path = track.path;
 
-        let mediaDiv = document.createElement("div");
+        const mediaDiv = document.createElement("div");
         mediaDiv.classList.add("media");
 
-        let mediaLeft = document.createElement("div");
+        const mediaLeft = document.createElement("div");
         mediaLeft.classList.add("media-left");
 
-        let figure = document.createElement("figure");
+        const figure = document.createElement("figure");
         figure.classList.add("image", "is-48x48");
 
-        let img = document.createElement("img");
+        const img = document.createElement("img");
         img.classList.add("is-rounded");
         img.src = track.image;
         figure.appendChild(img);
@@ -61,15 +61,15 @@ const setupTracks = (trackElement: HTMLElement): void => {
         const sprite = new Sprite(img);
         sprites.set(div, sprite);
 
-        let mediaContent = document.createElement("div");
+        const mediaContent = document.createElement("div");
         mediaContent.classList.add("media-content");
 
-        let h3 = document.createElement("h3");
+        const h3 = document.createElement("h3");
         h3.classList.add("title", "is-size-6");
         h3.innerHTML = track.name;
         mediaContent.appendChild(h3);
 
-        let p = document.createElement("p");
+        const p = document.createElement("p");
         p.classList.add("subtitle", "is-size-7");
         p.innerHTML = track.author;
         mediaContent.appendChild(p);
@@ -140,7 +140,7 @@ const setupUI = (canvasElement: HTMLCanvasElement): void => {
     };
 
     // volume slider
-    let volumeSlider = document.querySelector("#slider-volume") as HTMLInputElement;
+    const volumeSlider = document.querySelector("#slider-volume") as HTMLInputElement;
     volumeSlider.oninput = (e: Event) => {
         const target = e.target as HTMLInputElement;
         audio.setVolume(Number(target.value));

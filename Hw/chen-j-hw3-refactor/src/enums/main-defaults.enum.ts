@@ -1,3 +1,3 @@
-export enum DEFAULTS {
-    sound1 = "./assets/audio/Passing Memories.mp3"
+export enum Defaults {
+    SOUND_ONE = "./assets/audio/Passing Memories.mp3"
 }
