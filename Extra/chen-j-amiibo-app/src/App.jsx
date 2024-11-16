@@ -47,14 +47,14 @@ const App = () => {
   };
 
   return <>
-    <Header/>
+    <Header />
     <hr />
     <main>
-    <AmiiboSearchUI
-          term={term}
-          setTerm={setSearchTerm}
-          searchAmiibo={searchAmiibo}
-        />
+      <AmiiboSearchUI
+        term={term}
+        setTerm={setSearchTerm}
+        searchAmiibo={searchAmiibo}
+      />
       <AmiiboList array={results} />
     </main>
     <hr />

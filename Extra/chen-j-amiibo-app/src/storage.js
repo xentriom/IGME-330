@@ -3,10 +3,10 @@ const storeName = "abc1234-amiibo-app";
 const loadJSONFromLocalStorage = () => {
   const string = localStorage.getItem(storeName);
   let json;
-  try{
+  try {
     json = JSON.parse(string);
-    if(!json) throw new Error("json is null!");
-  }catch(error){
+    if (!json) throw new Error("json is null!");
+  } catch (error) {
     console.log(`ERROR: ${error} with string: ${string}`);
     json = {};
   }
