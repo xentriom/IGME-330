@@ -52,7 +52,7 @@ const showFeatureDetails = (id) => {
 	const feature = getFeatureById(id);
 
 	// check if selected is favourited
-	const favourited = storage.readFromLocalStorage("id").split(",").includes(id);
+	const favourited = storage.readFromLocalStorage().includes(id);
 
 	// title
 	document.querySelector("#details-1").innerHTML = `Info for ${feature.properties.title}`;
@@ -78,10 +78,9 @@ const refreshFavorites = () => {
 	favoritesContainer.innerHTML = "";
 
 	// get favourites from local storage
-	const favourites = storage.readFromLocalStorage("id");
-	const favouritesArray = favourites ? favourites.split(",") : [];
+	const favourites = storage.readFromLocalStorage();
 
-	for (const id of favouritesArray) {
+	for (const id of favourites) {
 		favoritesContainer.appendChild(createFavoriteElement(id));
 	}
 };
@@ -124,28 +123,14 @@ const loadButtons = (id, favourited) => {
 };
 
 const handleFavourite = (id) => {
-	// get favourites from local storage
-	const favourites = storage.readFromLocalStorage("id");
-	const favouritesArray = favourites ? favourites.split(",") : [];
-
-	// add new favourite
-	favouritesArray.push(id);
-	storage.writeToLocalStorage("id", favouritesArray.join(","));
+	storage.writeToLocalStorage(String(id));
+	showFeatureDetails(id);
 	refreshFavorites();
 };
 
 const handleDelete = (id) => {
-	// get favourites from local storage
-	const favourites = storage.readFromLocalStorage("id");
-	const favouritesArray = favourites ? favourites.split(",") : [];
-
-	// remove favourite
-	const index = favouritesArray.indexOf(id);
-	if (index > -1) {
-		favouritesArray.splice(index, 1);
-	}
-	
-	storage.writeToLocalStorage("id", favouritesArray.join(","));
+	storage.removeFromLocalStorage(String(id));
+	showFeatureDetails(id);
 	refreshFavorites();
 };
 
