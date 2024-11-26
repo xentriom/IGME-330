@@ -32,6 +32,19 @@ const setupUI = () => {
 		map.flyTo(lnglatUSA);
 	};
 
+	// event listener for favourite and delete buttons
+	document.querySelector("#details-2").addEventListener("click", (event) => {
+		const button = event.target.closest("button");
+		if (!button) return;
+
+		const { id, action } = button.dataset;
+		if (action === "favourite") {
+			handleFavourite(id);
+		} else if (action === "delete") {
+			handleDelete(id);
+		}
+	});
+
 	refreshFavorites();
 };
 
@@ -49,7 +62,7 @@ const showFeatureDetails = (id) => {
 		<p><strong>Address:</strong> ${feature.properties.address}</p>
 		<p><strong>Phone:</strong> <a href="tel:${feature.properties.phone}">${feature.properties.phone}</a></p>
 		<p><strong>Website:</strong> <a href="${feature.properties.url}" target="_blank">${feature.properties.url}</a></p>
-		${loadButtons(favourited)}
+		${loadButtons(id, favourited)}
 	`;
 
 	// description
@@ -95,20 +108,46 @@ const createFavoriteElement = (id) => {
 	return a;
 };
 
-const loadButtons = (favourited) => {
+const loadButtons = (id, favourited) => {
 	return `
 	<div class="buttons">
-		<button id="details-favourite" class="button is-info" ${favourited ? "disabled" : ""}>
+		<button data-id="${id}" data-action="favourite" class="button is-info" ${favourited ? "disabled" : ""}>
 			<span class="icon"><i class="fas fa-star"></i></span>
 			<span>Favourite</span>
 		</button>
-		<button id="details-delete" class="button is-danger" ${favourited ? "" : "disabled"}>
+		<button data-id="${id}" data-action="delete" class="button is-danger" ${favourited ? "" : "disabled"}>
 			<span class="icon"><i class="fas fa-trash"></i></span>
 			<span>Delete</span>
 		</button>
 	</div>
 	`;
-}
+};
+
+const handleFavourite = (id) => {
+	// get favourites from local storage
+	const favourites = storage.readFromLocalStorage("id");
+	const favouritesArray = favourites ? favourites.split(",") : [];
+
+	// add new favourite
+	favouritesArray.push(id);
+	storage.writeToLocalStorage("id", favouritesArray.join(","));
+	refreshFavorites();
+};
+
+const handleDelete = (id) => {
+	// get favourites from local storage
+	const favourites = storage.readFromLocalStorage("id");
+	const favouritesArray = favourites ? favourites.split(",") : [];
+
+	// remove favourite
+	const index = favouritesArray.indexOf(id);
+	if (index > -1) {
+		favouritesArray.splice(index, 1);
+	}
+	
+	storage.writeToLocalStorage("id", favouritesArray.join(","));
+	refreshFavorites();
+};
 
 const init = () => {
 	map.initMap(lnglatNYS);
