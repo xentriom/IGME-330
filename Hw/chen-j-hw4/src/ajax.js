@@ -7,8 +7,8 @@ export const downloadFile = (url, callbackRef) => {
 	xhr.onload = (e) => {
 		const headers = e.target.getAllResponseHeaders();
 		const jsonString = e.target.response;
-		console.log(`headers = ${headers}`);
-		console.log(`jsonString = ${jsonString}`);
+		// console.log(`headers = ${headers}`);
+		// console.log(`jsonString = ${jsonString}`);
 		callbackRef(jsonString);
 	}; // end xhr.onload
 	
