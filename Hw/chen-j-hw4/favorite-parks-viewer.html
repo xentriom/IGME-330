@@ -24,23 +24,39 @@
         </div>
     </header>
 
-    <section class="container">
-        <h2 class="title is-5 is-underlined">INCREMENT/DECREMENT A PARK COUNT (FOR TESTING PURPOSES ONLY).</h2>
-        <span>
-            <h1>PARK ID:</h1>
-            <input type="text" id="input-park-id" placeholder="Park ID">
-            <button id="button-park-counter">Send Park ID to Server</button>
-            <span>
-                <input type="checkbox" id="checkbox-count-type" name="count-type" value="decrement">
-                <label for="count-type">Decrement?</label>
-            </span>
-        </span>
-    </section>
+    <main class="section">
+        <div class="container">
+            <div class="box">
+                <h2 class="title is-5 is-underlined">INCREMENT/DECREMENT A PARK COUNT (FOR TESTING PURPOSES ONLY).</h2>
+                <div class="field">
+                    <label class="label">Park ID</label>
+                    <div class="control">
+                        <input class="input" type="text" id="input-park-id" placeholder="Enter Park ID">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="checkbox">
+                        <input type="checkbox" id="checkbox-count-type" name="count-type" value="decrement">
+                        Decrement?
+                    </label>
+                </div>
+                <div class="field">
+                    <button id="button-park-counter" class="button is-info">
+                        <span class="icon"><i class="fas fa-paper-plane"></i></span>
+                        <span>Send Park ID to Server</span>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-    <section class="container">
-        <h2 class="title is-5 is-underlined">VIEW PARK POPULARITY</h2>
-        <ol id="park-list"></ol>
-    </section>
+        <div class="container mt-5">
+            <div class="box">
+                <h2 class="title is-5 is-underlined">VIEW PARK POPULARITY</h2>
+                <ol id="park-list" class="content">
+                </ol>
+            </div>
+        </div>
+    </main>
 
     <footer class="footer has-background-info has-text-centered has-text-light p-1">&copy; 2024 Jason Chen</footer>
 </body>
