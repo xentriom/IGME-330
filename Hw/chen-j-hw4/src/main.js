@@ -37,7 +37,9 @@ const setupUI = () => {
 
 const showFeatureDetails = (id) => {
 	const feature = getFeatureById(id);
-	// get if its favourited or not and pass into loadButtons
+
+	// check if selected is favourited
+	const favourited = storage.readFromLocalStorage("id").split(",").includes(id);
 
 	// title
 	document.querySelector("#details-1").innerHTML = `Info for ${feature.properties.title}`;
@@ -47,7 +49,7 @@ const showFeatureDetails = (id) => {
 		<p><strong>Address:</strong> ${feature.properties.address}</p>
 		<p><strong>Phone:</strong> <a href="tel:${feature.properties.phone}">${feature.properties.phone}</a></p>
 		<p><strong>Website:</strong> <a href="${feature.properties.url}" target="_blank">${feature.properties.url}</a></p>
-		${loadButtons(true)}
+		${loadButtons(favourited)}
 	`;
 
 	// description
