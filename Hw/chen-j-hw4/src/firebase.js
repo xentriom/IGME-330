@@ -1,11 +1,34 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
-import { getDatabase, ref, set, push, runTransaction, onValue } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js";
+import { getDatabase, ref, runTransaction, onValue } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js";
 
+const parks = {
+    "p79": "Letchworth State Park",
+    "p20": "Hamlin Beach State Park",
+    "p180": "Brookhaven State Park",
+    "p35": "Allan H. Treman State Marine Park",
+    "p118": "Stony Brook State Park",
+    "p142": "Watkins Glen State Park",
+    "p62": "Taughannock Falls State Park",
+    "p84": "Selkirk Shores State Park",
+    "p43": "Chimney Bluffs State Park",
+    "p200": "Shirley Chisholm State Park",
+    "p112": "Saratoga Spa State Park"
+};
 let app;
 
 const setupUI = () => {
+    // add event listener to button
     document.querySelector("#button-park-counter").onclick = () => {
-        
+        const parkId = document.querySelector("#input-park-id").value;
+        const toDecrement = document.querySelector("#checkbox-count-type").checked;
+
+        if (!parks[parkId]) {
+            alert("Invalid park ID");
+            return;
+        }
+
+        updateLikeCount(parkId, !toDecrement);
+        loadData();
     };
 }
 
@@ -24,34 +47,43 @@ const initApp = () => {
 
 const loadData = () => {
     const db = getDatabase(app);
-    const likesRef = ref(db, 'likes');
+    const likesRef = ref(db, 'park');
+    const list = document.querySelector("#park-list");
 
     onValue(likesRef, (snapshot) => {
         const data = snapshot.val();
+        list.innerHTML = "";
 
-        console.log(data);
-        // TODO: add to ol
+        const items = Object.entries(data)
+            .map(([key, value]) => {
+                const parkName = parks[key] || "Unknown Park";
+                return `<li class="list-item"><strong>${parkName}</strong> (${key}) - Likes: ${value}</li>`;
+            })
+            .join("")
+            .trim();
+
+        list.innerHTML = items;
     });
 };
 
 export const updateLikeCount = (parkId, increment = true) => {
     const db = getDatabase(app);
-    const likeRef = ref(db, `likes/${parkId}`);
+    const likeRef = ref(db, `park/${parkId}`);
 
     runTransaction(likeRef, (currentLikes) => {
         if (currentLikes === null) {
             return increment ? 1 : 0;
         }
         return increment ? currentLikes + 1 : Math.max(0, currentLikes - 1);
-    })
-    .catch((error) => {
-        console.error(`Failed to update like count: ${error}`);
     });
 };
 
 const init = () => {
-    initApp();
-    loadData();
+    try {
+        initApp();
+        setupUI();
+        loadData();
+    } catch { }
 };
 
 init();
