@@ -1,7 +1,7 @@
 import * as map from "./map.js";
 import * as ajax from "./ajax.js";
 import * as storage from "./storage.js";
-import * as firebase from "./firebase.js";
+import { updateLikeCount } from "./firebase.js";
 
 // I. Variables & constants
 // NB - it's easy to get [longitude,latitude] coordinates with this tool: http://geojson.io/
@@ -125,14 +125,14 @@ const loadButtons = (id, favourited) => {
 
 const handleFavourite = (id) => {
 	storage.writeToLocalStorage(String(id));
-	firebase.updateLikeCount(String(id), true);
+	updateLikeCount(String(id), true);
 	showFeatureDetails(id);
 	refreshFavorites();
 };
 
 const handleDelete = (id) => {
 	storage.removeFromLocalStorage(String(id));
-	firebase.updateLikeCount(String(id), false);
+	updateLikeCount(String(id), false);
 	showFeatureDetails(id);
 	refreshFavorites();
 };
