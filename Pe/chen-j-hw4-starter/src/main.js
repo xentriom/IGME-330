@@ -14,14 +14,14 @@ const setupUI = () => {
 	document.querySelector("#btn1").onclick = () => {
 		map.setZoomLevel(5.2);
 		map.setPitchAndBearing(0, 0);
-		map.flyTo(lnglatUSA);
+		map.flyTo(lnglatNYS);
 	};
 
 	// NYS isometric view
 	document.querySelector("#btn2").onclick = () => {
 		map.setZoomLevel(5.5);
 		map.setPitchAndBearing(45, 0);
-		map.flyTo(lnglatUSA);
+		map.flyTo(lnglatNYS);
 	};
 
 	// World zoom 0
