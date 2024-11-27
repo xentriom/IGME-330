@@ -13,21 +13,21 @@ let geojson;
 // II. Functions
 const setupUI = () => {
 	// NYS Zoom 5.2
-	document.querySelector("#btn1").onclick = () => {
+	document.querySelector("#button-nys-zoom").onclick = () => {
 		map.setZoomLevel(5.2);
 		map.setPitchAndBearing(0, 0);
-		map.flyTo(lnglatUSA);
+		map.flyTo(lnglatNYS);
 	};
 
 	// NYS isometric view
-	document.querySelector("#btn2").onclick = () => {
+	document.querySelector("#button-nys-iso").onclick = () => {
 		map.setZoomLevel(5.5);
 		map.setPitchAndBearing(45, 0);
-		map.flyTo(lnglatUSA);
+		map.flyTo(lnglatNYS);
 	};
 
 	// World zoom 0
-	document.querySelector("#btn3").onclick = () => {
+	document.querySelector("#button-usa-zoom").onclick = () => {
 		map.setZoomLevel(3);
 		map.setPitchAndBearing(0, 0);
 		map.flyTo(lnglatUSA);
