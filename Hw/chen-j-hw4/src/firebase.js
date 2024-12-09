@@ -5,12 +5,12 @@ let app;
 
 export const initApp = () => {
     const firebaseConfig = {
-        apiKey: "AIzaSyBN5ML1DZiiIlwwZ9p6wF45d0TEyQc0BTI",
-        authDomain: "high-scores-56600.firebaseapp.com",
-        projectId: "high-scores-56600",
-        storageBucket: "high-scores-56600.firebasestorage.app",
-        messagingSenderId: "307360192328",
-        appId: "1:307360192328:web:5285f8e5fdcaf12e04857d"
+        apiKey: "AIzaSyCTLIOjE1iPut1ugATDnN2LW9J4Y0DQXlc",
+        authDomain: "ny-buddy.firebaseapp.com",
+        projectId: "ny-buddy",
+        storageBucket: "ny-buddy.firebasestorage.app",
+        messagingSenderId: "215633781841",
+        appId: "1:215633781841:web:969f03a85d85d1289cc470"
     };
 
     app = initializeApp(firebaseConfig);
